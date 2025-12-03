@@ -192,7 +192,7 @@ const gallery = [
   },
   {
     id: 2,
-    img: "/images/gal2.png",
+    img: "/images/gal2.jpg",
   },
   {
     id: 3,
@@ -406,16 +406,16 @@ const ABOUT_LOCATION = {
       kind: "file",
       fileType: "img",
       position: "top-28 right-72",
-      imageUrl: "/images/adrian-2.jpg",
+      imageUrl: "/images/adnan-2.jpg",
     },
     {
       id: 3,
-      name: "conference-me.png",
+      name: "trekking-me.png",
       icon: "/images/image.png",
       kind: "file",
       fileType: "img",
       position: "top-52 left-80",
-      imageUrl: "/images/adrian-3.jpeg",
+      imageUrl: "/images/adnan-3.png",
     },
     {
       id: 4,
