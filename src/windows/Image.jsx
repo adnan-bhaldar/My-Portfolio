@@ -1,6 +1,7 @@
 import { WindowControls } from '#components';
 import WindowWrapper from '#hoc/WindowWrapper';
 import useWindowStore from '#store/window';
+import { PlusIcon, Share, SquarePen } from 'lucide-react';
 import React from 'react'
 
 const ImageWindowContent = () => {
@@ -16,6 +17,11 @@ const ImageWindowContent = () => {
     <div id="window-header">
         <WindowControls target="imgfile" />
         <h2>{name}</h2>
+        <div className="flex items-center gap-3">
+                    <SquarePen className='icon' />
+                    <PlusIcon className='icon' />
+                    <Share className='icon' />
+                </div>
     </div>
 
     <div className="p-5 bg-white">

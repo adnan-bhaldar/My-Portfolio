@@ -8,6 +8,7 @@ const Contact = () => {
         <>
             <div id='window-header'>
                 <WindowControls target="contact" />
+                <h2>Contact Me</h2>
             </div>
 
             <div className="p-5 space-y-5">

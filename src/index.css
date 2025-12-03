@@ -259,7 +259,7 @@ body {
           }
 
           p {
-            @apply text-sm font-medium;
+            @apply text-sm font-normal;
           }
         }
       }
