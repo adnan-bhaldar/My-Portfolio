@@ -81,21 +81,21 @@ const blogPosts = [
     title:
       "TypeScript Explained: What It Is, Why It Matters, and How to Master It",
     image: "/images/blog1.png",
-    link: "https://github.com/adnan-bhaldar",
+    link: "https://github.com/adnan-bhaldar/",
   },
   {
     id: 2,
     date: "Aug 28, 2025",
     title: "The Ultimate Guide to Mastering Three.js for 3D Development",
     image: "/images/blog2.png",
-    link: "https://github.com/adnan-bhaldar",
+    link: "https://github.com/adnan-bhaldar/",
   },
   {
     id: 3,
     date: "Aug 15, 2025",
     title: "The Ultimate Guide to Mastering GSAP Animations",
     image: "/images/blog3.png",
-    link: "https://github.com/adnan-bhaldar",
+    link: "https://github.com/adnan-bhaldar/",
   },
 ];
 
