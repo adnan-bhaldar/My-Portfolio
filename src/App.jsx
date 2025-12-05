@@ -12,8 +12,6 @@ const App = () => {
       <Navbar />
       <Welcome />
       <Dock />
-
-
       <Terminal />
       <Safari />
       <Resume />
