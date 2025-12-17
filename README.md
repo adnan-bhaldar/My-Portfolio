@@ -66,7 +66,7 @@ Key files and folders to note:
 My-Portfolio/ 
 ├── node_modules/ 
 ├── public/
-│     ├── files/ .
+│     ├── files/
 │     │     └── resume.pdf 
 │     ├── icons/ 
 │     ├── images/  
