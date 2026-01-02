@@ -419,7 +419,9 @@ body {
 
   #resume {
     @apply w-fit h-fit absolute top-16 left-7/12 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
-    background-color: var(--window-bg);
+    background-color: var(--window-bg);    
+    top: 3.5rem;
+    left: 55%;
 
     #window-header {
       h2 {
