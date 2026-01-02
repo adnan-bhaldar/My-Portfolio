@@ -2,6 +2,59 @@
 
 @import "tailwindcss";
 
+/* ============================================
+   THEME VARIABLES
+   ============================================ */
+:root {
+  /* Light theme (default) */
+  --nav-bg: rgba(255, 255, 255, 0.5);
+  --nav-text: #000000;
+  --nav-icon-hover: #e5e5e5;
+  --icon-hover: #e5e5e5;
+  --window-header-bg: #f5f5f7;
+  --window-header-border: #e5e5e5;
+  --window-header-text: #9ca3af;
+  --window-bg: #ffffff;
+  --sidebar-bg: #f5f5f7;
+  --sidebar-border: #e5e5e5;
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --text-tertiary: #9ca3af;
+  --content-bg: #ffffff;
+  --border-color: #e5e5e5;
+  --hover-bg: #e5e5e5;
+  --active-bg: #dbeafe;
+  --active-text: #1d4ed8;
+  --search-bg: #ffffff;
+  --search-border: #d1d5db;
+  --preview-bg: #e5e5e5;
+}
+
+:root.dark-theme {
+  /* Dark theme */
+  --nav-bg: rgba(38, 28, 104, .8);
+  --nav-text: #ffffff;
+  --nav-icon-hover: rgba(188, 191, 203, 0.7);
+  --icon-hover: #222222;
+  --window-header-bg: #323232;
+  --window-header-border: transparent;
+  --window-header-text: #9ca3af;
+  --window-bg: #1E1E1E;
+  --sidebar-bg: #323232;
+  --sidebar-border: transparent;
+  --text-primary: #ffffff;
+  --text-secondary: #e5e5e5;
+  --text-tertiary: #65625C;
+  --content-bg: #1E1E1E;
+  --border-color: #343434;
+  --hover-bg: #222222;
+  --active-bg: #474747;
+  --active-text: #ffffff;
+  --search-bg: #222222;
+  --search-border: transparent;
+  --preview-bg: #323232;
+}
+
 html,
 body {
   width: 100dvw;
@@ -37,7 +90,9 @@ body {
   }
 
   nav {
-    @apply flex justify-between items-center bg-white/50 backdrop-blur-3xl p-3 px-5 select-none;
+    @apply flex justify-between items-center backdrop-blur-3xl p-3 px-5 select-none;
+    background-color: var(--nav-bg);
+    color: var(--nav-text);
 
     div {
       @apply flex items-center max-sm:w-full max-sm:justify-center gap-5;
@@ -56,14 +111,30 @@ body {
     }
 
     time {
-      @apply text-sm font-medium text-black;
+      @apply text-sm font-medium;
     }
   }
 }
 
 @layer components {
   .icon {
-    @apply p-1 hover:bg-gray-200 rounded hover:cursor-default;
+    @apply p-1 rounded hover:cursor-default;
+    
+    &:hover {
+      background-color: var(--icon-hover);
+    }
+  }
+
+  nav .icon {
+    &:hover {
+      background-color: var(--nav-icon-hover);
+    }
+  }
+
+  /* Dark mode: make navbar logo white */
+  :root.dark-theme nav img[alt="logo"],
+  :root.dark-theme nav .icon {
+    filter: brightness(0) invert(1);
   }
 
   #welcome {
@@ -115,22 +186,31 @@ body {
   }
 
   #window-header {
-    @apply flex items-center justify-between px-4 py-3 rounded-t-lg bg-gray-50 border-b border-gray-200 select-none text-sm text-gray-400;
+    @apply flex items-center justify-between px-4 py-3 rounded-t-lg select-none text-sm;
+    background-color: var(--window-header-bg);
+    border-bottom: 1px solid var(--window-header-border);
+    color: var(--window-header-text);
   }
 
   #safari {
-    @apply w-4xl absolute top-40 left-2/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    @apply w-4xl absolute top-40 left-2/12 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    background-color: var(--window-bg);
 
     .search {
-      @apply flex items-center gap-3 w-2/3 bg-white border border-gray-300 rounded-lg px-3 py-2;
+      @apply flex items-center gap-3 w-2/3 rounded-lg px-3 py-2;
+      background-color: var(--search-bg);
+      border: 1px solid var(--search-border);
 
       input {
         @apply placeholder:text-gray-400;
+        background: transparent;
+        color: var(--text-primary);
       }
     }
 
     .blog {
-      @apply bg-white p-10 max-w-3xl mx-auto;
+      @apply p-10 max-w-3xl mx-auto;
+      background-color: var(--window-bg);
 
       h2 {
         @apply text-xl font-bold text-pink-600 mb-10;
@@ -147,11 +227,13 @@ body {
           @apply col-span-10 space-y-3;
 
           p {
-            @apply text-xs text-gray-500;
+            @apply text-xs;
+            color: var(--text-secondary);
           }
 
           h3 {
-            @apply font-semibold text-base text-gray-800;
+            @apply font-semibold text-base;
+            color: var(--text-primary);
           }
 
           a {
@@ -163,14 +245,23 @@ body {
   }
 
   #terminal {
-    @apply w-xl absolute top-32 left-1/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    @apply w-xl absolute top-32 left-1/12 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    background-color: var(--window-bg);
+
+    #window-header {
+      h2 {
+        color: #9ca3af;
+      }
+    }
 
     h2 {
       @apply font-bold text-sm text-center w-full;
+      color: var(--text-primary);
     }
 
     .techstack {
       @apply text-sm font-roboto p-5;
+      color: var(--text-primary);
 
       .label {
         @apply flex items-center ms-10 mt-7;
@@ -178,6 +269,7 @@ body {
 
       .content {
         @apply py-5 my-5 border-y border-dashed space-y-1;
+        border-color: var(--border-color);
 
         li {
           .check {
@@ -204,19 +296,40 @@ body {
             @apply w-5 me-5;
           }
         }
+
+        .render-time {
+          color: var(--text-primary);
+
+          .flag-icon {
+            fill: var(--text-primary);
+          }
+        }
       }
     }
   }
 
   #contact {
-    @apply max-w-2xl absolute top-60 left-5/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    @apply max-w-2xl absolute top-60 left-5/12 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    background-color: var(--window-bg);
+
+    #window-header {
+      h2 {
+        color: #9ca3af;
+      }
+    }
 
     h2 {
       @apply font-bold text-sm text-center w-full;
+      color: var(--text-primary);
     }
 
     h3 {
       @apply text-xl font-semibold;
+      color: var(--text-primary);
+    }
+
+    p {
+      color: var(--text-primary);
     }
 
     ul {
@@ -237,21 +350,29 @@ body {
   }
 
   #photos {
-    @apply max-w-3xl absolute top-96 left-1/2 -translate-y-1/2 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    @apply max-w-3xl absolute top-96 left-1/2 -translate-y-1/2 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    background-color: var(--window-bg);
 
     .sidebar {
-      @apply w-3/12 flex-none bg-gray-50 border-r border-gray-200 flex flex-col p-5;
+      @apply w-3/12 flex-none border-r flex flex-col p-5;
+      background-color: var(--sidebar-bg);
+      border-color: var(--sidebar-border);
 
       h2 {
-        @apply text-xs font-medium text-gray-400 mb-1;
+        @apply text-xs font-medium mb-1;
+        color: var(--text-tertiary);
+        padding-bottom: 0.75rem;
       }
 
       ul {
         li {
           @apply flex space-y-1 items-center gap-2 px-3 py-2 rounded-md cursor-pointer transition-colors;
+          color: var(--text-primary);
+          margin-bottom: 0.5rem;
 
           &:first-child {
-            @apply bg-blue-100 text-blue-700;
+            background-color: var(--active-bg);
+            color: var(--active-text);
           }
 
           img {
@@ -297,7 +418,8 @@ body {
   }
 
   #resume {
-    @apply w-fit h-fit absolute top-16 left-7/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    @apply w-fit h-fit absolute top-16 left-7/12 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    background-color: var(--window-bg);
 
     #window-header {
       h2 {
@@ -310,21 +432,29 @@ body {
     @apply absolute w-3xl left-40 top-20 shadow-2xl drop-shadow-2xl overflow-hidden rounded-xl;
 
     .sidebar {
-      @apply w-48 bg-gray-50 border-r border-gray-200 flex flex-col p-5 space-y-3;
+      @apply w-48 border-r flex flex-col p-5 space-y-3;
+      background-color: var(--sidebar-bg);
+      border-color: var(--sidebar-border);
 
       h3 {
-        @apply text-xs font-medium text-gray-400 mb-1;
+        @apply text-xs font-medium mb-1;
+        color: var(--text-tertiary);
       }
 
       ul {
         @apply space-y-1;
 
         .active {
-          @apply bg-blue-100 text-blue-700;
+          background-color: var(--active-bg);
+          color: var(--active-text);
         }
 
         .not-active {
-          @apply text-gray-700 hover:bg-gray-200;
+          color: var(--text-primary);
+          
+          &:hover {
+            background-color: var(--hover-bg);
+          }
         }
 
         li {
@@ -334,7 +464,8 @@ body {
     }
 
     .content {
-      @apply flex-1 p-8 bg-white max-w-2xl relative;
+      @apply flex-1 p-8 max-w-2xl relative;
+      background-color: var(--window-bg);
 
       li {
         @apply absolute flex items-center flex-col gap-3;
@@ -345,35 +476,65 @@ body {
 
         p {
           @apply text-sm text-center font-medium w-40;
+          color: var(--text-primary);
         }
       }
     }
   }
 
   #txtfile {
-    @apply w-md absolute top-36 right-32 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    @apply w-md absolute top-36 right-32 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    background-color: var(--window-bg);
+
+    #window-header {
+      h2 {
+        color: #9ca3af;
+      }
+    }
 
     h2 {
       @apply font-bold text-sm text-center w-full;
+      color: var(--text-primary);
+    }
+
+    .text-content {
+      @apply p-5 space-y-6;
+      background-color: var(--window-bg);
+
+      h3 {
+        color: var(--text-primary);
+      }
+
+      p {
+        color: var(--text-primary);
+      }
     }
   }
 
   #imgfile {
-    @apply w-xl absolute top-40 left-2/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    @apply w-xl absolute top-40 left-2/12 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    background-color: var(--window-bg);
 
     #window-header {
-      p {
-        @apply font-bold text-[#5f6266];
+      h2 {
+        @apply font-bold;
+        color: #9ca3af;
       }
     }
 
     .preview {
-      @apply p-2 bg-gray-200 max-h-[70vh];
+      @apply p-2 max-h-[70vh];
+      background-color: var(--preview-bg);
 
       img {
         @apply w-full h-fit object-contain object-center;
       }
     }
+  }
+
+  /* Dark theme specific override for image preview only */
+  :root.dark-theme #imgfile .preview {
+    background-color: #1E1E1E;
   }
 
   #home {
