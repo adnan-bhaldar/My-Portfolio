@@ -42,10 +42,10 @@ const ThemePopup = ({ isOpen, onClose, theme, setTheme }) => {
                                 isActive
                                 ? isDark
                                     ? 'bg-[#262626] text-white'
-                                    : 'text-gray-700' 
+                                    : 'text-gray-700 bg-[#dadada]' 
                                     : isDark 
                                         ? 'text-gray-300 hover:bg-[#262626]' // Hover allowed only in Dark Mode
-                                        : 'text-gray-700 hover:bg-transparent' // NO black hover in Light Mode
+                                        : 'text-gray-700 hover:bg-[#dadada]' // NO black hover in Light Mode
                             }`}
                         >
                             <Icon size={17} strokeWidth={2.5} className="shrink-0" />

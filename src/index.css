@@ -47,7 +47,7 @@
   --text-tertiary: #65625C;
   --content-bg: #1E1E1E;
   --border-color: #343434;
-  --hover-bg: #222222;
+  --hover-bg: #474747;
   --active-bg: #474747;
   --active-text: #ffffff;
   --search-bg: #222222;
@@ -419,7 +419,9 @@ body {
 
   #resume {
     @apply w-fit h-fit absolute top-16 left-7/12 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
-    background-color: var(--window-bg);
+    background-color: var(--window-bg);    
+    top: 3.5rem;
+    left: 55%;
 
     #window-header {
       h2 {
