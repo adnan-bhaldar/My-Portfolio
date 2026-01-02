@@ -5,9 +5,11 @@ This is a **React-based** portfolio engineered to mimic the **macOS** desktop en
 ### ✨ Key Features
 
 * **Authentic macOS UI:** Custom styling for the Dock, Menu Bar, and window chrome (traffic light controls).
+* **Multiple Theme Support:** Seamlessly switch between Light, Dark, and System themes. The System theme automatically adapts to your device's appearance preferences, ensuring optimal viewing comfort at any time of day while maintaining the authentic macOS aesthetic across all theme modes.
 * **Draggable & Resizable Windows:** Content components are wrapped in a custom HOC (`WindowWrapper`), allowing users to move and manage application windows like a real OS.
 * **Resume Viewer:** Integrates `react-pdf` to display the resume document directly within a dedicated desktop application window.
 * **Dynamic Navigation:** The Dock acts as the main navigation hub, launching specific content windows (About, Projects, Contact, etc.).
+* **Responsive Design:** Maintains desktop fidelity while remaining usable on smaller screens.
 * **Responsive Design:** Maintains desktop fidelity while remaining usable on smaller screens.
 
 ### 🖼️ Screenshots
@@ -85,6 +87,8 @@ My-Portfolio/
 │     │      └── index.js 
 │     ├── hoc/ 
 │     │      └── WindowWrapper.jsx 
+│     ├── hooks/
+│     │      └── useTheme.jsx 
 │     ├── store/ 
 │     │      ├── location.js 
 │     │      └── window.js
@@ -105,6 +109,7 @@ My-Portfolio/
 ├── README.md
 ├── index.html 
 ├── jsconfig.json 
+├── tailwind.config.js
 ├── package.json 
 ├── package-lock.json 
 ├── preview.png 
