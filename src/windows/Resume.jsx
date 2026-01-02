@@ -35,7 +35,7 @@ const Resume = () => {
             WebkitOverflowScrolling: 'touch'
           }}
         >
-          <style jsx>{`
+          <style>{`
             div::-webkit-scrollbar {
               display: none;
             }
