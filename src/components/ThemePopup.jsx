@@ -9,13 +9,31 @@ const ThemePopup = ({ isOpen, onClose, theme, setTheme }) => {
 
     const handleThemeSelect = (selectedTheme) => {
         setTheme(selectedTheme);
-        setTimeout(() => onClose(), 150);
+        setTimeout(() => onClose(), 50);
     };
 
     const themeOptions = [
-        { id: 'light', name: 'Light', icon: Sun },
-        { id: 'dark', name: 'Dark', icon: Moon },
-        { id: 'system', name: 'System', icon: Laptop },
+        { 
+            id: 'light', 
+            name: 'Light', 
+            icon: Sun,
+            activeFill: '#EAB308', // Yellow fill
+            activeStroke: '#000000' // Black outline
+        },
+        { 
+            id: 'dark', 
+            name: 'Dark', 
+            icon: Moon,
+            activeFill: '#EF4444', // Red fill
+            activeStroke: '#FFFFFF' // White outline
+        },
+        { 
+            id: 'system', 
+            name: 'System', 
+            icon: Laptop,
+            activeFill: null,
+            activeStroke: null
+        },
     ];
 
     return (
@@ -31,7 +49,7 @@ const ThemePopup = ({ isOpen, onClose, theme, setTheme }) => {
             onClick={(e) => e.stopPropagation()}
         >
             <div className="py-2 px-2 flex flex-col gap-1">
-                {themeOptions.map(({ id, name, icon: Icon }) => {
+                {themeOptions.map(({ id, name, icon: Icon, activeFill, activeStroke }) => {
                     const isActive = theme === id;
                     
                     return (
@@ -44,11 +62,19 @@ const ThemePopup = ({ isOpen, onClose, theme, setTheme }) => {
                                     ? 'bg-[#262626] text-white'
                                     : 'text-gray-700 bg-[#dadada]' 
                                     : isDark 
-                                        ? 'text-gray-300 hover:bg-[#262626]' // Hover allowed only in Dark Mode
-                                        : 'text-gray-700 hover:bg-[#dadada]' // NO black hover in Light Mode
+                                        ? 'text-gray-300 hover:bg-[#262626]'
+                                        : 'text-gray-700 hover:bg-[#dadada]'
                             }`}
                         >
-                            <Icon size={17} strokeWidth={2.5} className="shrink-0" />
+                            <Icon 
+                                size={17} 
+                                strokeWidth={isActive && activeStroke ? 1.25 : 2.5}
+                                className="shrink-0"
+                                style={{
+                                    fill: isActive && activeFill ? activeFill : 'none',
+                                    stroke: isActive && activeStroke ? activeStroke : 'currentColor'
+                                }}
+                            />
                             <span className="text-sm font-semibold">{name}</span>
                         </button>
                     );
