@@ -21,7 +21,7 @@ const Text = () => {
     <div className="text-content">
         {image ? (
             <div className="w-full">
-                <img src={image} alt={name} className="w-full h-auto rounded" />
+                <img src={image} alt={name} className="w-30 h-auto rounded-full" />
             </div>
         ) : null}
 
