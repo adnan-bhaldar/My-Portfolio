@@ -10,7 +10,6 @@ This is a **React-based** portfolio engineered to mimic the **macOS** desktop en
 * **Resume Viewer:** Integrates `react-pdf` to display the resume document directly within a dedicated desktop application window.
 * **Dynamic Navigation:** The Dock acts as the main navigation hub, launching specific content windows (About, Projects, Contact, etc.).
 * **Responsive Design:** Maintains desktop fidelity while remaining usable on smaller screens.
-* **Responsive Design:** Maintains desktop fidelity while remaining usable on smaller screens.
 
 ### 🖼️ Screenshots
 
