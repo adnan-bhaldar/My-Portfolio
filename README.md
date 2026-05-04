@@ -39,7 +39,7 @@ Follow these steps to set up the project locally.
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/adnan-bhaldar/My-Portfolio.git](https://github.com/adnan-bhaldar/My-Portfolio.git)
+    git clone https://github.com/adnan-bhaldar/My-Portfolio.git
     cd My-Portfolio
     ```
 
