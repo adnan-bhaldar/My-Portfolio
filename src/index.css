@@ -60,10 +60,15 @@ body {
   width: 100dvw;
   overflow: hidden;
   height: 100dvh;
-  background-image: url("/images/wallpaper.png");
+  background-image: url("/images/wallpaper-light.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+:root.dark-theme html,
+:root.dark-theme body {
+  background-image: url("/images/wallpaper-dark.jpg");
 }
 
 @theme {
