@@ -13,7 +13,7 @@ This is a **React-based** portfolio engineered to mimic the **macOS** desktop en
 
 ### 🖼️ Screenshots
 
-![Screenshot of the macOS themed portfolio showing open windows and the dock.](/preview.png)
+![Screenshot of the macOS themed portfolio showing open windows and the dock.](/public/preview.png)
 
 
 ### 🛠️ Tech Stack
