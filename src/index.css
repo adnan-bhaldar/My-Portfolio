@@ -124,7 +124,7 @@ body {
 @layer components {
   .icon {
     @apply p-1 rounded hover:cursor-default;
-    
+
     &:hover {
       background-color: var(--icon-hover);
     }
@@ -178,15 +178,25 @@ body {
     @apply flex gap-2;
 
     .close {
-      @apply size-3.5 rounded-full bg-[#ff6157] cursor-pointer;
+      @apply size-3.5 rounded-full cursor-pointer flex items-center justify-center bg-[#ff6157];
     }
 
     .minimize {
-      @apply size-3.5 rounded-full bg-[#ffc030];
+      @apply size-3.5 rounded-full cursor-pointer flex items-center justify-center bg-[#ffc030];
     }
 
     .maximize {
-      @apply size-3.5 rounded-full bg-[#2acb42];
+      @apply size-3.5 rounded-full cursor-pointer flex items-center justify-center bg-[#2acb42];
+    }
+
+    svg,
+    img {
+      @apply size-2.5 opacity-0 scale-75 pointer-events-none transition-all duration-300 ease-out;
+    }
+
+    &:hover svg,
+    &:hover img {
+      @apply opacity-100 scale-100;
     }
   }
 
@@ -424,7 +434,7 @@ body {
 
   #resume {
     @apply w-fit h-fit absolute top-16 left-7/12 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
-    background-color: var(--window-bg);    
+    background-color: var(--window-bg);
     top: 3.5rem;
     left: 55%;
 
