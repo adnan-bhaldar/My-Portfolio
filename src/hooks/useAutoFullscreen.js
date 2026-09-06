@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 /**
  * Requests fullscreen automatically as soon as the visitor interacts
- * with the page in any way (click, tap, keypress, scroll).
+ * with the page (click, tap, or keydown).
  *
  * Browsers do NOT allow JavaScript to call requestFullscreen()
  * on page load without a user gesture — this is a security rule
@@ -13,7 +13,20 @@ import { useEffect } from 'react';
  */
 export const useAutoFullscreen = () => {
     useEffect(() => {
+        const events = ['click', 'touchend', 'keydown'];
+
+        const removeListeners = () => {
+            events.forEach((evt) =>
+                document.removeEventListener(evt, goFullscreen)
+            );
+        };
+
         const goFullscreen = () => {
+            // Remove all listeners immediately so a touchend followed by a
+            // compatibility click (common on mobile) can't fire this twice
+            // while the first request is still pending.
+            removeListeners();
+
             const el = document.documentElement;
 
             const isFullscreen =
@@ -29,21 +42,26 @@ export const useAutoFullscreen = () => {
                 el.msRequestFullscreen;
 
             if (request) {
-                request.call(el).catch(() => {
-                    // Ignore rejections (e.g. user dismissed, iframe restrictions, etc.)
-                });
+                try {
+                    // Modern requestFullscreen() returns a Promise; legacy
+                    // vendor-prefixed versions (webkit/ms) return undefined,
+                    // so only call .catch() when the result actually supports it.
+                    const result = request.call(el);
+                    if (result && typeof result.catch === 'function') {
+                        result.catch(() => {
+                            // Ignore rejections (e.g. user dismissed, iframe restrictions, etc.)
+                        });
+                    }
+                } catch {
+                    // Ignore synchronous fullscreen failures from legacy APIs.
+                }
             }
         };
 
-        const events = ['click', 'touchend', 'keydown'];
         events.forEach((evt) =>
-            document.addEventListener(evt, goFullscreen, { once: true })
+            document.addEventListener(evt, goFullscreen)
         );
 
-        return () => {
-            events.forEach((evt) =>
-                document.removeEventListener(evt, goFullscreen)
-            );
-        };
+        return removeListeners;
     }, []);
 };
