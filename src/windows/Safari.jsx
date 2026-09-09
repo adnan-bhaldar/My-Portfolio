@@ -6,7 +6,20 @@ import React, { useState } from 'react'
 
 const isLikelyUrl = (value) => {
     if (/\s/.test(value)) return false
-    return /^(https?:\/\/)?([\w-]+\.)+[a-z]{2,}([/?#].*)?$/i.test(value)
+
+    const candidate = /^https?:\/\//i.test(value) ? value : `https://${value}`
+
+    try {
+        const url = new URL(candidate)
+        return (
+            ['http:', 'https:'].includes(url.protocol) &&
+            (url.hostname === 'localhost' ||
+                url.hostname.includes('.') ||
+                url.hostname.includes(':'))
+        )
+    } catch {
+        return false
+    }
 }
 
 const Safari = () => {

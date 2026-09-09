@@ -29,9 +29,7 @@ const WindowWrapper = (Component, windowKey) => {
 
             const [instance] = Draggable.create(el, {
                 trigger: el.querySelector('#window-header'),
-                cancel: 'input, textarea, button, a, [contenteditable]',
-                dragClickables: false,
-                onPress: () => focusWindow(windowKey)
+                dragClickables: false
             });
 
             return () => instance.kill();
@@ -43,7 +41,14 @@ const WindowWrapper = (Component, windowKey) => {
           el.style.display = isOpen ? "block" : " none";
         }, [isOpen])
 
-        return (<section id={windowKey} ref={ref} style={{ zIndex }} className='absolute'>
+        return (<section 
+        id={windowKey} 
+        ref={ref} 
+        style={{ zIndex }} 
+        className='absolute'
+        onMouseDownCapture={() => focusWindow(windowKey)}
+        onTouchStartCapture={() => focusWindow(windowKey)}
+        >
             <Component {...props} />
         </section>
         );
