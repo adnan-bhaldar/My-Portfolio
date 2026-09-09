@@ -216,8 +216,12 @@ body {
       background-color: var(--search-bg);
       border: 1px solid var(--search-border);
 
+      &:has(input:focus-visible) {
+        @apply ring-2 ring-blue-500;
+      }
+
       input {
-        @apply placeholder:text-gray-400;
+        @apply placeholder:text-gray-400 outline-none select-text;
         background: transparent;
         color: var(--text-primary);
       }
