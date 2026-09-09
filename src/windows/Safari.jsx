@@ -2,9 +2,33 @@ import { WindowControls } from '#components'
 import { blogPosts } from '#constants'
 import WindowWrapper from '#hoc/WindowWrapper.jsx'
 import { MoveRight, ChevronLeft, ChevronRight, Copy, PanelLeft, PlusIcon, Search, Share, ShieldHalf } from 'lucide-react'
-import React from 'react'
+import React, { useState } from 'react'
+
+const isLikelyUrl = (value) => {
+    if (/\s/.test(value)) return false
+    return /^(https?:\/\/)?([\w-]+\.)+[a-z]{2,}([/?#].*)?$/i.test(value)
+}
 
 const Safari = () => {
+    const [query, setQuery] = useState('')
+
+    const handleSearch = (e) => {
+        if (e.key === 'Enter' && query.trim()) {
+            const value = query.trim()
+            const url = isLikelyUrl(value)
+                ? (/^https?:\/\//i.test(value) ? value : `https://${value}`)
+                : `https://www.google.com/search?q=${encodeURIComponent(value)}`
+
+            window.open(url, '_blank', 'noopener,noreferrer')
+            return
+        }
+
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'a') {
+            e.preventDefault()
+            e.target.select()
+        }
+    }
+
     return (
         <>
             <div id='window-header'>
@@ -23,7 +47,17 @@ const Safari = () => {
                     <div className="search">
                         <Search className='icon' />
 
-                        <input type="text" placeholder='Search' className='flex-1' />
+                        <input
+                            type="text"
+                            placeholder='Search'
+                            className='flex-1'
+                            value={query}
+                            onChange={(e) => setQuery(e.target.value)}
+                            onKeyDown={handleSearch}
+                            onMouseDown={(e) => e.stopPropagation()}
+                            onTouchStart={(e) => e.stopPropagation()}
+                            onClick={(e) => e.currentTarget.focus()}
+                        />
                     </div>
                 </div>
 

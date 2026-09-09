@@ -217,7 +217,7 @@ body {
       border: 1px solid var(--search-border);
 
       input {
-        @apply placeholder:text-gray-400;
+        @apply placeholder:text-gray-400 outline-none select-text;
         background: transparent;
         color: var(--text-primary);
       }
