@@ -74,28 +74,55 @@ const dockApps = [
   },
 ];
 
-const blogPosts = [
+const favorites = [
   {
     id: 1,
-    date: "Sep 2, 2025",
-    title:
-      "TypeScript Explained: What It Is, Why It Matters, and How to Master It",
-    image: "/images/blog1.png",
-    link: "https://github.com/adnan-bhaldar/",
+    name: "GitHub",
+    icon: "/icons/github.svg",
+    bg: "#f4656b",
+    link: "https://github.com/adnan-bhaldar",
   },
   {
     id: 2,
-    date: "Aug 28, 2025",
-    title: "The Ultimate Guide to Mastering Three.js for 3D Development",
-    image: "/images/blog2.png",
-    link: "https://github.com/adnan-bhaldar/",
+    name: "LinkedIn",
+    icon: "/icons/linkedin.svg",
+    bg: "#05b6f6",
+    link: "https://www.linkedin.com/in/adnan-bhaldar",
   },
   {
     id: 3,
-    date: "Aug 15, 2025",
-    title: "The Ultimate Guide to Mastering GSAP Animations",
-    image: "/images/blog3.png",
-    link: "https://github.com/adnan-bhaldar/",
+    name: "Mail",
+    icon: "/icons/mail.svg",
+    bg: "#4bcb63",
+    link: "mailto:adnanbhaldar115@gmail.com",
+  },
+  {
+    id: 4,
+    name: "Resume",
+    icon: "/images/pdf.png",
+    bg: "#f5a623",
+    windowKey: "resume",
+  },
+];
+
+const liveProjects = [
+  {
+    id: 1,
+    name: "Bindery",
+    image: "/images/project-1.png",
+    link: "https://bindery.vercel.app/",
+  },
+  {
+    id: 2,
+    name: "Quicklook",
+    image: "/images/project-2.png",
+    link: "https://quicklookapp.vercel.app/",
+  },
+  {
+    id: 3,
+    name: "Snapthumb",
+    image: "/images/project-3.png",
+    link: "https://snapthumb.vercel.app/",
   },
 ];
 
@@ -208,11 +235,12 @@ export {
   navLinks,
   navIcons,
   dockApps,
-  blogPosts,
   techStack,
   socials,
   photosLinks,
   gallery,
+  favorites,
+  liveProjects,
 };
 
 const WORK_LOCATION = {

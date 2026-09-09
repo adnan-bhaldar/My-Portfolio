@@ -2,6 +2,15 @@
 
 @import "tailwindcss";
 
+/* Prevent the browser's native drag-ghost behavior on images site-wide,
+   since this is a desktop-style UI, not a page with draggable content. */
+img {
+  -webkit-user-drag: none;
+  user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+}
+
 /* ============================================
    THEME VARIABLES
    ============================================ */
@@ -227,36 +236,102 @@ body {
       }
     }
 
-    .blog {
-      @apply p-10 max-w-3xl mx-auto;
+    .tab-strip {
+      @apply flex items-center gap-1 px-4 py-2;
       background-color: var(--window-bg);
+      border-bottom: 1px solid var(--search-border);
 
-      h2 {
-        @apply text-xl font-bold text-pink-600 mb-10;
-      }
+      .tab {
+        @apply text-sm px-3 py-1 rounded-md cursor-pointer;
+        color: var(--text-secondary);
 
-      .blog-post {
-        @apply grid grid-cols-12 space-x-5;
-
-        img {
-          @apply size-full rounded-md object-cover;
+        &.active {
+          @apply font-semibold;
+          background-color: var(--search-bg);
+          color: var(--text-primary);
         }
 
-        .content {
-          @apply col-span-10 space-y-3;
+        &:hover:not(.active) {
+          background-color: var(--search-bg);
+        }
+      }
+    }
+
+    .safari-body {
+      @apply flex;
+      height: 60vh;
+
+      .tab-content {
+        @apply flex-1 p-10 overflow-y-auto;
+        background: radial-gradient(circle at top, color-mix(in srgb, var(--text-primary) 4%, transparent), transparent 60%), var(--window-bg);
+      }
+
+      .start-page {
+        @apply max-w-lg mx-auto pt-6;
+      }
+
+      .start-page-hero {
+        @apply text-center mb-10;
+
+        h2 {
+          @apply text-2xl font-bold mb-1;
+          color: var(--text-primary);
+        }
+
+        p {
+          @apply text-sm;
+          color: var(--text-secondary);
+        }
+      }
+
+      .favorites-grid {
+        @apply grid grid-cols-4 gap-6;
+      }
+
+      .favorite-tile {
+        @apply flex flex-col items-center gap-2 cursor-pointer transition-transform duration-200;
+
+        .favorite-icon {
+          @apply flex items-center justify-center size-14 rounded-2xl shadow-lg;
+
+          img {
+            @apply size-7 object-contain;
+          }
+        }
+
+        p {
+          @apply text-xs font-medium;
+          color: var(--text-primary);
+        }
+
+        &:hover {
+          @apply -translate-y-1;
+        }
+      }
+
+      .projects-grid {
+        @apply grid grid-cols-2 gap-6 max-w-2xl mx-auto;
+      }
+
+      .project-card {
+        @apply rounded-xl overflow-hidden;
+        background-color: var(--search-bg);
+        border: 1px solid var(--search-border);
+
+        img {
+          @apply w-full h-32 object-cover;
+        }
+
+        .project-card-footer {
+          @apply flex items-center justify-between p-3;
 
           p {
-            @apply text-xs;
-            color: var(--text-secondary);
-          }
-
-          h3 {
-            @apply font-semibold text-base;
+            @apply text-sm font-medium;
             color: var(--text-primary);
           }
 
-          a {
-            @apply text-blue-600 text-xs hover:underline flex items-center gap-3;
+          button {
+            @apply text-xs flex items-center gap-1 text-blue-600 cursor-pointer hover:underline;
           }
         }
       }
