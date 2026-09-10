@@ -86,6 +86,7 @@ const Safari = () => {
                             <button
                                 type='button'
                                 className="clear-search"
+                                aria-label="Clear address bar"
                                 onMouseDown={(e) => e.stopPropagation()}
                                 onClick={(e) => {
                                     setQuery('')
