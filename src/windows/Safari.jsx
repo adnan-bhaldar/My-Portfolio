@@ -1,7 +1,8 @@
 import { WindowControls } from '#components'
-import { blogPosts } from '#constants'
+import { favorites, liveProjects } from '#constants'
 import WindowWrapper from '#hoc/WindowWrapper.jsx'
-import { MoveRight, ChevronLeft, ChevronRight, Copy, PanelLeft, PlusIcon, Search, Share, ShieldHalf } from 'lucide-react'
+import useWindowStore from '#store/window.js'
+import { ChevronLeft, ChevronRight, Copy, ExternalLink, Home, LayoutGrid, PanelLeft, PlusIcon, Search, Share, ShieldHalf, X } from 'lucide-react'
 import React, { useState } from 'react'
 
 const isLikelyUrl = (value) => {
@@ -22,8 +23,17 @@ const isLikelyUrl = (value) => {
     }
 }
 
+const TABS = [
+    { id: 'home', label: 'Home Page', icon: Home },
+    { id: 'projects', label: 'Projects', icon: LayoutGrid },
+]
+
+const openExternal = (link) => window.open(link, '_blank', 'noopener,noreferrer')
+
 const Safari = () => {
+    const { openWindow } = useWindowStore()
     const [query, setQuery] = useState('')
+    const [activeTab, setActiveTab] = useState('home')
 
     const handleSearch = (e) => {
         if (e.key === 'Enter' && query.trim()) {
@@ -32,7 +42,7 @@ const Safari = () => {
                 ? (/^https?:\/\//i.test(value) ? value : `https://${value}`)
                 : `https://www.google.com/search?q=${encodeURIComponent(value)}`
 
-            window.open(url, '_blank', 'noopener,noreferrer')
+            openExternal(url)
             return
         }
 
@@ -62,7 +72,7 @@ const Safari = () => {
 
                         <input
                             type="text"
-                            placeholder='Search'
+                            placeholder='Search or enter website name'
                             className='flex-1'
                             value={query}
                             onChange={(e) => setQuery(e.target.value)}
@@ -71,6 +81,21 @@ const Safari = () => {
                             onTouchStart={(e) => e.stopPropagation()}
                             onClick={(e) => e.currentTarget.focus()}
                         />
+
+                        {query && (
+                            <button
+                                type='button'
+                                className="clear-search"
+                                aria-label="Clear address bar"
+                                onMouseDown={(e) => e.stopPropagation()}
+                                onClick={(e) => {
+                                    setQuery('')
+                                    e.currentTarget.previousElementSibling?.focus()
+                                }}
+                            >
+                                <X size={14} />
+                            </button>
+                        )}
                     </div>
                 </div>
 
@@ -81,24 +106,72 @@ const Safari = () => {
                 </div>
             </div>
 
-            <div className="blog">
-                <h2>My Developer Blog</h2>
-
-                <div className="space-y-8">
-                    {blogPosts.map(({ id, image, title, date, link }) => (
-                        <div key={id} className='blog-post'>
-                            <div className='col-span-2'>
-                                <img src={image} alt={title} />
+            <div className="safari-body">
+                <div className="tab-content">
+                    {activeTab === 'home' && (
+                        <div className="start-page">
+                            <div className="start-page-hero">
+                                <h2>Favorites</h2>
+                                <p>Quick access to my profiles, work, and resume</p>
                             </div>
 
-                            <div className="content">
-                                <p>{date}</p>
-                                <h3>{title}</h3>
-                                <a href={link} target='_blank' rel='noopener noreferrer'>
-                                    Check out the full post <MoveRight className='icon-hover' />
-                                </a>
+                            <div className="favorites-panel">
+                                <div className="favorites-grid">
+                                    {favorites.map(({ id, name, icon, bg, link, windowKey }, index) => (
+                                        <button
+                                            key={id}
+                                            type='button'
+                                            className="favorite-tile"
+                                            style={{ animationDelay: `${index * 60}ms` }}
+                                            onMouseDown={(e) => e.stopPropagation()}
+                                            onClick={() => (windowKey ? openWindow(windowKey) : openExternal(link))}
+                                        >
+                                            <span className="favorite-icon" style={{ '--tile-color': bg }}>
+                                                <img src={icon} alt={name} draggable={false} />
+                                            </span>
+                                            <p>{name}</p>
+                                        </button>
+                                    ))}
+                                </div>
                             </div>
                         </div>
+                    )}
+
+                    {activeTab === 'projects' && (
+                        <div className="projects-grid">
+                            {liveProjects.map(({ id, name, image, link }, index) => (
+                                <div
+                                    key={id}
+                                    className="project-card"
+                                    style={{ animationDelay: `${index * 70}ms` }}
+                                >
+                                    <div className="project-thumb">
+                                        <img src={image} alt={name} draggable={false} />
+                                    </div>
+                                    <div className="project-card-footer">
+                                        <p>{name}</p>
+                                        <button type='button' onClick={() => openExternal(link)}>
+                                            Visit <ExternalLink size={14} />
+                                        </button>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
+
+                <div className="floating-tabs">
+                    {TABS.map(({ id, label, icon: Icon }) => (
+                        <button
+                            key={id}
+                            type='button'
+                            className={`segment ${activeTab === id ? 'active' : ''}`}
+                            onMouseDown={(e) => e.stopPropagation()}
+                            onClick={() => setActiveTab(id)}
+                        >
+                            <Icon size={14} />
+                            {label}
+                        </button>
                     ))}
                 </div>
             </div>

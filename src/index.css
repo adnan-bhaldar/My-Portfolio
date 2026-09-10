@@ -2,6 +2,15 @@
 
 @import "tailwindcss";
 
+/* Prevent the browser's native drag-ghost behavior on images site-wide,
+   since this is a desktop-style UI, not a page with draggable content. */
+img {
+  -webkit-user-drag: none;
+  user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+}
+
 /* ============================================
    THEME VARIABLES
    ============================================ */
@@ -91,7 +100,7 @@ body {
 
 @layer base {
   main {
-    @apply w-dvw h-dvh overflow-hidden;
+    @apply w-dvw h-dvh overflow-hidden select-none;
   }
 
   nav {
@@ -122,6 +131,17 @@ body {
 }
 
 @layer components {
+  @keyframes tile-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   .icon {
     @apply p-1 rounded hover:cursor-default;
 
@@ -225,38 +245,165 @@ body {
         background: transparent;
         color: var(--text-primary);
       }
+
+      .clear-search {
+        @apply flex items-center justify-center size-5 rounded-full shrink-0 cursor-pointer transition-colors duration-150;
+        color: var(--text-secondary);
+
+        &:hover {
+          background-color: var(--border-color);
+          color: var(--text-primary);
+        }
+      }
     }
 
-    .blog {
-      @apply p-10 max-w-3xl mx-auto;
-      background-color: var(--window-bg);
+    .safari-body {
+      @apply relative;
+      height: 60vh;
 
-      h2 {
-        @apply text-xl font-bold text-pink-600 mb-10;
+      .tab-content {
+        @apply w-full h-full p-10 overflow-y-auto;
+        background: radial-gradient(circle at top, color-mix(in srgb, var(--text-primary) 4%, transparent), transparent 60%), var(--window-bg);
       }
 
-      .blog-post {
-        @apply grid grid-cols-12 space-x-5;
+      .floating-tabs {
+        @apply absolute bottom-5 right-5 flex gap-1 p-1 rounded-full shadow-xl;
+        background-color: color-mix(in srgb, var(--search-bg) 90%, transparent);
+        backdrop-filter: blur(12px);
+        border: 1px solid var(--search-border);
+      }
 
-        img {
-          @apply size-full rounded-md object-cover;
+      .segment {
+        @apply flex items-center gap-1.5 text-sm px-4 py-2 rounded-full cursor-pointer transition-all duration-150;
+        color: var(--text-secondary);
+
+        &.active {
+          @apply font-semibold shadow-sm;
+          background-color: var(--window-bg);
+          color: var(--text-primary);
         }
 
-        .content {
-          @apply col-span-10 space-y-3;
+        &:hover:not(.active) {
+          color: var(--text-primary);
+        }
+      }
+
+      .start-page {
+        @apply max-w-lg mx-auto pt-6;
+      }
+
+      .start-page-hero {
+        @apply text-center mb-8;
+
+        h2 {
+          @apply text-2xl font-bold mb-1 tracking-tight;
+          color: var(--text-primary);
+        }
+
+        p {
+          @apply text-sm;
+          color: var(--text-secondary);
+        }
+      }
+
+      .favorites-panel {
+        @apply rounded-2xl p-8;
+        background-color: color-mix(in srgb, var(--search-bg) 60%, transparent);
+        border: 1px solid var(--border-color);
+      }
+
+      .favorites-grid {
+        @apply grid grid-cols-4 gap-6;
+      }
+
+      .favorite-tile {
+        @apply flex flex-col items-center gap-2 cursor-pointer transition-transform duration-200;
+        opacity: 0;
+        animation: tile-in 0.45s ease-out forwards;
+
+        .favorite-icon {
+          @apply relative flex items-center justify-center size-14 rounded-2xl transition-all duration-300 ease-out;
+          background: linear-gradient(135deg, var(--tile-color), color-mix(in srgb, var(--tile-color) 55%, black));
+          box-shadow:
+            inset 0 1px 1px rgba(255, 255, 255, 0.35),
+            inset 0 -2px 3px rgba(0, 0, 0, 0.25),
+            0 0 10px color-mix(in srgb, var(--tile-color) 35%, transparent);
+
+          img {
+            @apply size-7 object-contain relative z-10;
+          }
+        }
+
+        p {
+          @apply text-xs font-medium;
+          color: var(--text-primary);
+        }
+
+        &:hover {
+          @apply -translate-y-1;
+
+          .favorite-icon {
+            @apply scale-105;
+            box-shadow:
+              inset 0 1px 1px rgba(255, 255, 255, 0.4),
+              inset 0 -2px 3px rgba(0, 0, 0, 0.25),
+              0 0 20px color-mix(in srgb, var(--tile-color) 55%, transparent);
+          }
+        }
+      }
+
+      .projects-grid {
+        @apply grid grid-cols-2 gap-6 max-w-2xl mx-auto;
+      }
+
+      .project-card {
+        @apply rounded-xl overflow-hidden transition-all duration-300 ease-out;
+        background-color: var(--search-bg);
+        border: 1px solid var(--border-color);
+        opacity: 0;
+        animation: tile-in 0.45s ease-out forwards;
+
+        .project-thumb {
+          @apply overflow-hidden;
+
+          img {
+            @apply w-full h-32 object-cover transition-transform duration-500 ease-out;
+          }
+        }
+
+        .project-card-footer {
+          @apply flex items-center justify-between p-3;
 
           p {
-            @apply text-xs;
-            color: var(--text-secondary);
-          }
-
-          h3 {
-            @apply font-semibold text-base;
+            @apply text-sm font-medium;
             color: var(--text-primary);
           }
 
-          a {
-            @apply text-blue-600 text-xs hover:underline flex items-center gap-3;
+          button {
+            @apply relative inline-flex items-center gap-1.5 text-xs font-semibold px-4 py-2 rounded-full text-white cursor-pointer transition-all duration-300 ease-out;
+            background: linear-gradient(135deg, #3b82f6, #6366f1);
+
+            svg {
+              @apply transition-transform duration-300 ease-out;
+            }
+
+            &:hover {
+              svg {
+                @apply translate-x-0.5 -translate-y-0.5;
+              }
+            }
+
+            &:active {
+              @apply scale-95 translate-y-0;
+            }
+          }
+        }
+
+        &:hover {
+          @apply -translate-y-1;
+
+          .project-thumb img {
+            @apply scale-110;
           }
         }
       }
