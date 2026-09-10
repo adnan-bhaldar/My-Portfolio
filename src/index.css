@@ -100,7 +100,7 @@ body {
 
 @layer base {
   main {
-    @apply w-dvw h-dvh overflow-hidden;
+    @apply w-dvw h-dvh overflow-hidden select-none;
   }
 
   nav {
@@ -234,36 +234,47 @@ body {
         background: transparent;
         color: var(--text-primary);
       }
-    }
 
-    .tab-strip {
-      @apply flex items-center gap-1 px-4 py-2;
-      background-color: var(--window-bg);
-      border-bottom: 1px solid var(--search-border);
-
-      .tab {
-        @apply text-sm px-3 py-1 rounded-md cursor-pointer;
+      .clear-search {
+        @apply flex items-center justify-center size-5 rounded-full shrink-0 cursor-pointer transition-colors duration-150;
         color: var(--text-secondary);
 
-        &.active {
-          @apply font-semibold;
-          background-color: var(--search-bg);
+        &:hover {
+          background-color: var(--border-color);
           color: var(--text-primary);
-        }
-
-        &:hover:not(.active) {
-          background-color: var(--search-bg);
         }
       }
     }
 
     .safari-body {
-      @apply flex;
+      @apply relative;
       height: 60vh;
 
       .tab-content {
-        @apply flex-1 p-10 overflow-y-auto;
+        @apply w-full h-full p-10 overflow-y-auto;
         background: radial-gradient(circle at top, color-mix(in srgb, var(--text-primary) 4%, transparent), transparent 60%), var(--window-bg);
+      }
+
+      .floating-tabs {
+        @apply absolute bottom-5 right-5 flex gap-1 p-1 rounded-full shadow-xl;
+        background-color: color-mix(in srgb, var(--search-bg) 90%, transparent);
+        backdrop-filter: blur(12px);
+        border: 1px solid var(--search-border);
+      }
+
+      .segment {
+        @apply flex items-center gap-1.5 text-sm px-4 py-2 rounded-full cursor-pointer transition-all duration-150;
+        color: var(--text-secondary);
+
+        &.active {
+          @apply font-semibold shadow-sm;
+          background-color: var(--window-bg);
+          color: var(--text-primary);
+        }
+
+        &:hover:not(.active) {
+          color: var(--text-primary);
+        }
       }
 
       .start-page {
@@ -316,7 +327,7 @@ body {
       .project-card {
         @apply rounded-xl overflow-hidden;
         background-color: var(--search-bg);
-        border: 1px solid var(--search-border);
+        border: 1px solid var(--border-color);
 
         img {
           @apply w-full h-32 object-cover;
@@ -331,7 +342,22 @@ body {
           }
 
           button {
-            @apply text-xs flex items-center gap-1 text-blue-600 cursor-pointer hover:underline;
+            @apply relative inline-flex items-center gap-1.5 text-xs font-semibold px-4 py-2 rounded-full text-white cursor-pointer transition-all duration-300 ease-out;
+            background: linear-gradient(135deg, #3b82f6, #6366f1);
+
+            svg {
+              @apply transition-transform duration-300 ease-out;
+            }
+
+            &:hover {
+              svg {
+                @apply translate-x-0.5 -translate-y-0.5;
+              }
+            }
+
+            &:active {
+              @apply scale-95 translate-y-0;
+            }
           }
         }
       }

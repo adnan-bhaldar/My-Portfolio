@@ -2,7 +2,7 @@ import { WindowControls } from '#components'
 import { favorites, liveProjects } from '#constants'
 import WindowWrapper from '#hoc/WindowWrapper.jsx'
 import useWindowStore from '#store/window.js'
-import { ChevronLeft, ChevronRight, Copy, ExternalLink, PanelLeft, PlusIcon, Search, Share, ShieldHalf } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Copy, ExternalLink, Home, LayoutGrid, PanelLeft, PlusIcon, Search, Share, ShieldHalf, X } from 'lucide-react'
 import React, { useState } from 'react'
 
 const isLikelyUrl = (value) => {
@@ -24,8 +24,8 @@ const isLikelyUrl = (value) => {
 }
 
 const TABS = [
-    { id: 'home', label: 'Start Page' },
-    { id: 'projects', label: 'Projects' },
+    { id: 'home', label: 'Home Page', icon: Home },
+    { id: 'projects', label: 'Projects', icon: LayoutGrid },
 ]
 
 const openExternal = (link) => window.open(link, '_blank', 'noopener,noreferrer')
@@ -81,6 +81,20 @@ const Safari = () => {
                             onTouchStart={(e) => e.stopPropagation()}
                             onClick={(e) => e.currentTarget.focus()}
                         />
+
+                        {query && (
+                            <button
+                                type='button'
+                                className="clear-search"
+                                onMouseDown={(e) => e.stopPropagation()}
+                                onClick={(e) => {
+                                    setQuery('')
+                                    e.currentTarget.previousElementSibling?.focus()
+                                }}
+                            >
+                                <X size={14} />
+                            </button>
+                        )}
                     </div>
                 </div>
 
@@ -89,19 +103,6 @@ const Safari = () => {
                     <PlusIcon className='icon' />
                     <Copy className='icon' />
                 </div>
-            </div>
-
-            <div className="tab-strip">
-                {TABS.map(({ id, label }) => (
-                    <button
-                        key={id}
-                        type='button'
-                        className={`tab ${activeTab === id ? 'active' : ''}`}
-                        onClick={() => setActiveTab(id)}
-                    >
-                        {label}
-                    </button>
-                ))}
             </div>
 
             <div className="safari-body">
@@ -147,6 +148,21 @@ const Safari = () => {
                             ))}
                         </div>
                     )}
+                </div>
+
+                <div className="floating-tabs">
+                    {TABS.map(({ id, label, icon: Icon }) => (
+                        <button
+                            key={id}
+                            type='button'
+                            className={`segment ${activeTab === id ? 'active' : ''}`}
+                            onMouseDown={(e) => e.stopPropagation()}
+                            onClick={() => setActiveTab(id)}
+                        >
+                            <Icon size={14} />
+                            {label}
+                        </button>
+                    ))}
                 </div>
             </div>
         </>
