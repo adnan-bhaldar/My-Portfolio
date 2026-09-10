@@ -114,21 +114,24 @@ const Safari = () => {
                                 <p>Quick access to my profiles, work, and resume</p>
                             </div>
 
-                            <div className="favorites-grid">
-                                {favorites.map(({ id, name, icon, bg, link, windowKey }) => (
-                                    <button
-                                        key={id}
-                                        type='button'
-                                        className="favorite-tile"
-                                        onMouseDown={(e) => e.stopPropagation()}
-                                        onClick={() => (windowKey ? openWindow(windowKey) : openExternal(link))}
-                                    >
-                                        <span className="favorite-icon" style={{ backgroundColor: bg }}>
-                                            <img src={icon} alt={name} draggable={false} />
-                                        </span>
-                                        <p>{name}</p>
-                                    </button>
-                                ))}
+                            <div className="favorites-panel">
+                                <div className="favorites-grid">
+                                    {favorites.map(({ id, name, icon, bg, link, windowKey }, index) => (
+                                        <button
+                                            key={id}
+                                            type='button'
+                                            className="favorite-tile"
+                                            style={{ animationDelay: `${index * 60}ms` }}
+                                            onMouseDown={(e) => e.stopPropagation()}
+                                            onClick={() => (windowKey ? openWindow(windowKey) : openExternal(link))}
+                                        >
+                                            <span className="favorite-icon" style={{ '--tile-color': bg }}>
+                                                <img src={icon} alt={name} draggable={false} />
+                                            </span>
+                                            <p>{name}</p>
+                                        </button>
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     )}
