@@ -138,9 +138,15 @@ const Safari = () => {
 
                     {activeTab === 'projects' && (
                         <div className="projects-grid">
-                            {liveProjects.map(({ id, name, image, link }) => (
-                                <div key={id} className="project-card">
-                                    <img src={image} alt={name} draggable={false} />
+                            {liveProjects.map(({ id, name, image, link }, index) => (
+                                <div
+                                    key={id}
+                                    className="project-card"
+                                    style={{ animationDelay: `${index * 70}ms` }}
+                                >
+                                    <div className="project-thumb">
+                                        <img src={image} alt={name} draggable={false} />
+                                    </div>
                                     <div className="project-card-footer">
                                         <p>{name}</p>
                                         <button type='button' onClick={() => openExternal(link)}>

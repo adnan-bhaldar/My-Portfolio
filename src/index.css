@@ -357,12 +357,18 @@ body {
       }
 
       .project-card {
-        @apply rounded-xl overflow-hidden;
+        @apply rounded-xl overflow-hidden transition-all duration-300 ease-out;
         background-color: var(--search-bg);
         border: 1px solid var(--border-color);
+        opacity: 0;
+        animation: tile-in 0.45s ease-out forwards;
 
-        img {
-          @apply w-full h-32 object-cover;
+        .project-thumb {
+          @apply overflow-hidden;
+
+          img {
+            @apply w-full h-32 object-cover transition-transform duration-500 ease-out;
+          }
         }
 
         .project-card-footer {
@@ -390,6 +396,14 @@ body {
             &:active {
               @apply scale-95 translate-y-0;
             }
+          }
+        }
+
+        &:hover {
+          @apply -translate-y-1;
+
+          .project-thumb img {
+            @apply scale-110;
           }
         }
       }
