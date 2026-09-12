@@ -18,12 +18,12 @@ const Terminal = ({ isOpen }) => {
     // Reset the animation state synchronously during render whenever isOpen
     // changes, following React's documented pattern for "adjusting state
     // when a prop changes" (react.dev/learn/you-might-not-need-an-effect).
-    // This keeps the effect below free of synchronous setState calls.
+    // This keeps the effect below free of synchronous setState calls. Refs
+    // are intentionally NOT touched here — only in the effect/cleanup below,
+    // which is where ref access is actually allowed.
     const [prevIsOpen, setPrevIsOpen] = useState(isOpen)
     if (isOpen !== prevIsOpen) {
         setPrevIsOpen(isOpen)
-        cancelledRef.current = true
-        clearTimeout(timeoutRef.current)
 
         if (isOpen) {
             setPhase('command')
