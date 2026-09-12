@@ -41,15 +41,15 @@ const WindowWrapper = (Component, windowKey) => {
           el.style.display = isOpen ? "block" : " none";
         }, [isOpen])
 
-        return (<section 
-        id={windowKey} 
-        ref={ref} 
-        style={{ zIndex }} 
-        className='absolute'
-        onMouseDownCapture={() => focusWindow(windowKey)}
-        onTouchStartCapture={() => focusWindow(windowKey)}
+        return (<section
+            id={windowKey}
+            ref={ref}
+            style={{ zIndex }} 
+            className='absolute' 
+            onMouseDownCapture={() => focusWindow(windowKey)} 
+            onTouchStartCapture={() => focusWindow(windowKey)} 
         >
-            <Component {...props} />
+            <Component {...props} isOpen={isOpen} />
         </section>
         );
     };
