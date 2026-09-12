@@ -19,10 +19,15 @@ const Terminal = ({ isOpen }) => {
         if (!isOpen) return
 
         cancelledRef.current = false
+        // This effect starts an external timer-driven animation sequence in
+        // response to isOpen changing (not state derivable during render),
+        // so resetting these here is intentional, not an avoidable pattern.
+        /* eslint-disable react-hooks/set-state-in-effect */
         setPhase('command')
         setCommandTyped('')
         setStageIndex(-1)
         setStageTyped('')
+        /* eslint-enable react-hooks/set-state-in-effect */
 
         const typeStage = (si, ci) => {
             if (cancelledRef.current) return
