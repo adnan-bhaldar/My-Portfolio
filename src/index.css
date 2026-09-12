@@ -142,6 +142,15 @@ body {
     }
   }
 
+  @keyframes cursor-blink {
+    0%, 50% {
+      opacity: 1;
+    }
+    50.01%, 100% {
+      opacity: 0;
+    }
+  }
+
   .icon {
     @apply p-1 rounded hover:cursor-default;
 
@@ -429,6 +438,17 @@ body {
       @apply text-sm font-roboto p-5;
       color: var(--text-primary);
 
+      .cursor {
+        @apply inline-block w-2 h-4 align-middle ml-0.5;
+        background-color: var(--text-primary);
+        animation: cursor-blink 1s step-end infinite;
+      }
+
+      .typing-items {
+        @apply flex items-center;
+        color: var(--text-secondary);
+      }
+
       .label {
         @apply flex items-center ms-10 mt-7;
       }
@@ -460,14 +480,6 @@ body {
 
           svg {
             @apply w-5 me-5;
-          }
-        }
-
-        .render-time {
-          color: var(--text-primary);
-
-          .flag-icon {
-            fill: var(--text-primary);
           }
         }
       }

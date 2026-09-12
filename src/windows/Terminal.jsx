@@ -1,10 +1,90 @@
 import { WindowControls } from '#components';
 import { techStack } from '#constants';
 import WindowWrapper from '#hoc/WindowWrapper';
-import { Check, Flag } from 'lucide-react';
-import React from 'react'
+import { Check } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react'
 
-const Terminal = () => {
+const COMMAND = 'show tech stack'
+
+const Terminal = ({ isOpen }) => {
+    const [phase, setPhase] = useState('idle') // idle | command | typing | done
+    const [commandTyped, setCommandTyped] = useState('')
+    const [stageIndex, setStageIndex] = useState(-1)
+    const [stageTyped, setStageTyped] = useState('')
+
+    const cancelledRef = useRef(false)
+    const timeoutRef = useRef(null)
+
+    // Reset the animation state synchronously during render whenever isOpen
+    // changes, following React's documented pattern for "adjusting state
+    // when a prop changes" (react.dev/learn/you-might-not-need-an-effect).
+    // This keeps the effect below free of synchronous setState calls. Refs
+    // are intentionally NOT touched here — only in the effect/cleanup below,
+    // which is where ref access is actually allowed.
+    const [prevIsOpen, setPrevIsOpen] = useState(isOpen)
+    if (isOpen !== prevIsOpen) {
+        setPrevIsOpen(isOpen)
+
+        if (isOpen) {
+            setPhase('command')
+            setCommandTyped('')
+            setStageIndex(-1)
+            setStageTyped('')
+        }
+    }
+
+    useEffect(() => {
+        if (!isOpen) return
+
+        cancelledRef.current = false
+
+        const typeStage = (si, ci) => {
+            if (cancelledRef.current) return
+
+            if (si >= techStack.length) {
+                timeoutRef.current = setTimeout(() => setPhase('done'), 400)
+                return
+            }
+
+            const text = techStack[si].items.join(', ')
+            setStageIndex(si)
+            setStageTyped(text.slice(0, ci))
+
+            timeoutRef.current = ci < text.length
+                ? setTimeout(() => typeStage(si, ci + 1), 18)
+                : setTimeout(() => typeStage(si + 1, 0), 150)
+        }
+
+        const typeCommand = (i = 0) => {
+            if (cancelledRef.current) return
+            setCommandTyped(COMMAND.slice(0, i))
+
+            timeoutRef.current = i < COMMAND.length
+                ? setTimeout(() => typeCommand(i + 1), 45)
+                : setTimeout(() => {
+                    setPhase('typing')
+                    typeStage(0, 0)
+                }, 300)
+        }
+
+        typeCommand()
+
+        return () => {
+            cancelledRef.current = true
+            clearTimeout(timeoutRef.current)
+        }
+    }, [isOpen])
+
+    const isDone = phase === 'done'
+    const commandDone = phase === 'typing' || phase === 'done'
+
+    const handleSkip = () => {
+        if (phase === 'done') return
+        cancelledRef.current = true
+        clearTimeout(timeoutRef.current)
+        setPhase('done')
+    }
+
     return (
         <>
             <div id='window-header'>
@@ -12,10 +92,11 @@ const Terminal = () => {
                 <h2>Tech Stack</h2>
             </div>
 
-            <div className='techstack'>
+            <div className='techstack' onClick={handleSkip}>
                 <p>
                     <span className='font-bold'>@adnan % </span>
-                    show tech stack
+                    {commandDone ? COMMAND : commandTyped}
+                    {!commandDone && <span className='cursor' />}
                 </p>
 
                 <div className="label">
@@ -24,28 +105,41 @@ const Terminal = () => {
                 </div>
 
                 <ul className="content">
-                    {techStack.map(({ category, items }) => (
-                        <li key={category} className='flex items-center'>
-                            <Check className='check' size={20} />
-                            <h3>{category}</h3>
-                            <ul>
-                                {items.map((item, i) => (
-                                    <li key={i}>{item}{i < items.length - 1 ? ',' : ''}</li>
-                                ))}
-                            </ul>
-                        </li>
-                    ))}
+                    {techStack.map(({ category, items }, catIdx) => {
+                        const itemsDone = isDone || stageIndex > catIdx
+                        const typingItems = !isDone && stageIndex === catIdx
+
+                        return (
+                            <li key={category} className='flex items-center'>
+                                <Check className='check' size={20} />
+                                <h3>{category}</h3>
+
+                                {itemsDone ? (
+                                    <ul>
+                                        {items.map((item, i) => (
+                                            <li key={i}>{item}{i < items.length - 1 ? ',' : ''}</li>
+                                        ))}
+                                    </ul>
+                                ) : typingItems ? (
+                                    <span className='typing-items'>
+                                        {stageTyped}<span className='cursor' />
+                                    </span>
+                                ) : null}
+                            </li>
+                        )
+                    })}
                 </ul>
 
                 <div className="footnote">
                     <p>
                         <Check size={20} /> 5 of 5 stacks loaded successfully (100%)
                     </p>
-                    <p className="render-time pt-1">
-                        <Flag size={15} className="flag-icon" />
-                        Render time: 6ms
-                    </p>
                 </div>
+
+                <p className={`pt-3 ${isDone ? '' : 'invisible'}`}>
+                    <span className='font-bold'>@adnan % </span>
+                    <span className='cursor' />
+                </p>
             </div>
         </>
     )
