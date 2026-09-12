@@ -15,19 +15,28 @@ const Terminal = ({ isOpen }) => {
     const cancelledRef = useRef(false)
     const timeoutRef = useRef(null)
 
+    // Reset the animation state synchronously during render whenever isOpen
+    // changes, following React's documented pattern for "adjusting state
+    // when a prop changes" (react.dev/learn/you-might-not-need-an-effect).
+    // This keeps the effect below free of synchronous setState calls.
+    const [prevIsOpen, setPrevIsOpen] = useState(isOpen)
+    if (isOpen !== prevIsOpen) {
+        setPrevIsOpen(isOpen)
+        cancelledRef.current = true
+        clearTimeout(timeoutRef.current)
+
+        if (isOpen) {
+            setPhase('command')
+            setCommandTyped('')
+            setStageIndex(-1)
+            setStageTyped('')
+        }
+    }
+
     useEffect(() => {
         if (!isOpen) return
 
         cancelledRef.current = false
-        // This effect starts an external timer-driven animation sequence in
-        // response to isOpen changing (not state derivable during render),
-        // so resetting these here is intentional, not an avoidable pattern.
-        /* eslint-disable react-hooks/set-state-in-effect */
-        setPhase('command')
-        setCommandTyped('')
-        setStageIndex(-1)
-        setStageTyped('')
-        /* eslint-enable react-hooks/set-state-in-effect */
 
         const typeStage = (si, ci) => {
             if (cancelledRef.current) return
