@@ -148,7 +148,8 @@ const Safari = () => {
                                     <div className="project-thumb">
                                         <img src={image} alt={name} draggable={false} />
                                     </div>
-                                    <div className="project-card-footer">
+
+                                    <div className="project-card-overlay">
                                         <p>{name}</p>
                                         <button type='button' onClick={() => openExternal(link)}>
                                             Visit <ExternalLink size={14} />
