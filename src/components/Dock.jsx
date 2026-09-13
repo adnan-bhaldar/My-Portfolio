@@ -6,7 +6,7 @@ import gsap from 'gsap';
 import useWindowStore from '#store/window.js';
 
 const Dock = () => {
-    const { openWindow, closeWindow, windows} = useWindowStore()
+    const { openWindow, closeWindow, windows } = useWindowStore()
     const dockRef = useRef(null);
 
     useGSAP(() => {
@@ -53,29 +53,29 @@ const Dock = () => {
 
         return () => {
             dock.addEventListener('mousemove', handleMouseMove);
-        dock.addEventListener('mouseleave', resetIcons);
+            dock.addEventListener('mouseleave', resetIcons);
         };
     }, []);
 
 
     const toggleApp = (app) => {
-        if(!app. canOpen) return;
+        if (!app.canOpen) return;
 
         const window = windows[app.id];
 
-        if(!window) {
+        if (!window) {
             console.error(`Window not found for app: ${app.id}`);
             return;
         }
 
-        if(window.isOpen) {
+        if (window.isOpen) {
             closeWindow(app.id);
         } else {
             openWindow(app.id);
         }
 
         console.log(windows);
-        
+
     }
 
     return (

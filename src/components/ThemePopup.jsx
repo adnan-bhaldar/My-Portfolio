@@ -4,7 +4,7 @@ import { useTheme } from '#hooks/useTheme.js';
 
 const ThemePopup = ({ isOpen, onClose, theme, setTheme }) => {
     const { isDark } = useTheme();
-    
+
     if (!isOpen) return null;
 
     const handleThemeSelect = (selectedTheme) => {
@@ -13,23 +13,23 @@ const ThemePopup = ({ isOpen, onClose, theme, setTheme }) => {
     };
 
     const themeOptions = [
-        { 
-            id: 'light', 
-            name: 'Light', 
+        {
+            id: 'light',
+            name: 'Light',
             icon: Sun,
             activeFill: '#EAB308', // Yellow fill
             activeStroke: '#000000' // Black outline
         },
-        { 
-            id: 'dark', 
-            name: 'Dark', 
+        {
+            id: 'dark',
+            name: 'Dark',
             icon: Moon,
             activeFill: '#EF4444', // Red fill
             activeStroke: '#FFFFFF' // White outline
         },
-        { 
-            id: 'system', 
-            name: 'System', 
+        {
+            id: 'system',
+            name: 'System',
             icon: Laptop,
             activeFill: null,
             activeStroke: null
@@ -38,11 +38,10 @@ const ThemePopup = ({ isOpen, onClose, theme, setTheme }) => {
 
     return (
         <div
-            className={`fixed top-10 right-25 z-50 w-34 rounded-lg shadow-2xl overflow-hidden backdrop-blur-xl border  ${
-                isDark 
-                    ? 'bg-[#171717]/95 border-gray-700/50' 
+            className={`fixed top-10 right-25 z-50 w-34 rounded-lg shadow-2xl overflow-hidden backdrop-blur-xl border  ${isDark
+                    ? 'bg-[#171717]/95 border-gray-700/50'
                     : 'bg-white border-none'
-            }`}
+                }`}
             style={{
                 animation: 'slideDown 0.2s ease-out',
             }}
@@ -51,23 +50,22 @@ const ThemePopup = ({ isOpen, onClose, theme, setTheme }) => {
             <div className="py-2 px-2 flex flex-col gap-1">
                 {themeOptions.map(({ id, name, icon: Icon, activeFill, activeStroke }) => {
                     const isActive = theme === id;
-                    
+
                     return (
                         <button
                             key={id}
                             onClick={() => handleThemeSelect(id)}
-                            className={` pl-4 w-30 flex items-center gap-3.5 py-1.5 rounded-lg transition-all ${
-                                isActive
-                                ? isDark
-                                    ? 'bg-[#262626] text-white'
-                                    : 'text-gray-700 bg-[#dadada]' 
-                                    : isDark 
+                            className={` pl-4 w-30 flex items-center gap-3.5 py-1.5 rounded-lg transition-all ${isActive
+                                    ? isDark
+                                        ? 'bg-[#262626] text-white'
+                                        : 'text-gray-700 bg-[#dadada]'
+                                    : isDark
                                         ? 'text-gray-300 hover:bg-[#262626]'
                                         : 'text-gray-700 hover:bg-[#dadada]'
-                            }`}
+                                }`}
                         >
-                            <Icon 
-                                size={17} 
+                            <Icon
+                                size={17}
                                 strokeWidth={isActive && activeStroke ? 1.25 : 2.5}
                                 className="shrink-0"
                                 style={{

@@ -19,42 +19,42 @@ const Resume = () => {
 
   return (
     <div className="flex flex-col h-full">
-        <div id='window-header' style={{ position: 'relative', zIndex: 10 }}>
-            <WindowControls target="resume" />
-            <h2>Resume.pdf</h2>
+      <div id='window-header' style={{ position: 'relative', zIndex: 10 }}>
+        <WindowControls target="resume" />
+        <h2>Resume.pdf</h2>
 
-            <a href="files/resume.pdf" download className='cursor-pointer' title='Download Resume'>
-                <Download className='icon' />
-            </a>
-        </div>
-        <div 
-          className="overflow-y-auto max-h-[87vh]"
-          style={{
-            scrollbarWidth: 'none',
-            msOverflowStyle: 'none',
-            WebkitOverflowScrolling: 'touch'
-          }}
-        >
-          <style>{`
+        <a href="files/resume.pdf" download className='cursor-pointer' title='Download Resume'>
+          <Download className='icon' />
+        </a>
+      </div>
+      <div
+        className="overflow-y-auto max-h-[87vh]"
+        style={{
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none',
+          WebkitOverflowScrolling: 'touch'
+        }}
+      >
+        <style>{`
             div::-webkit-scrollbar {
               display: none;
             }
           `}</style>
-          <Document 
-            file="files/resume.pdf"
-            onLoadSuccess={onDocumentLoadSuccess}
-          >
-            {numPages && Array.from(new Array(numPages), (el, index) => (
-              <Page 
-                key={`page_${index + 1}`}
-                pageNumber={index + 1} 
-                renderTextLayer 
-                renderAnnotationLayer
-                className="mb-1"
-              />
-            ))}
-          </Document>
-        </div>
+        <Document
+          file="files/resume.pdf"
+          onLoadSuccess={onDocumentLoadSuccess}
+        >
+          {numPages && Array.from(new Array(numPages), (el, index) => (
+            <Page
+              key={`page_${index + 1}`}
+              pageNumber={index + 1}
+              renderTextLayer
+              renderAnnotationLayer
+              className="mb-1"
+            />
+          ))}
+        </Document>
+      </div>
     </div>
   )
 }
