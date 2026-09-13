@@ -366,25 +366,27 @@ body {
       }
 
       .project-card {
-        @apply rounded-xl overflow-hidden transition-all duration-300 ease-out;
-        background-color: var(--search-bg);
+        @apply relative rounded-xl overflow-hidden transition-all duration-300 ease-out h-48;
         border: 1px solid var(--border-color);
         opacity: 0;
         animation: tile-in 0.45s ease-out forwards;
 
         .project-thumb {
-          @apply overflow-hidden;
+          @apply absolute inset-0 overflow-hidden;
 
           img {
-            @apply w-full h-32 object-cover transition-transform duration-500 ease-out;
+            @apply w-full h-full object-cover transition-transform duration-500 ease-out;
           }
         }
 
-        .project-card-footer {
-          @apply flex items-center justify-between p-3;
+        .project-card-overlay {
+          @apply absolute inset-x-3 bottom-3 flex items-center justify-between gap-3 rounded-full px-4 py-2;
+          background: color-mix(in srgb, var(--search-bg) 75%, transparent);
+          backdrop-filter: blur(5px);
+          -webkit-backdrop-filter: blur(5px);
 
           p {
-            @apply text-sm font-medium;
+            @apply text-sm font-semibold truncate;
             color: var(--text-primary);
           }
 
