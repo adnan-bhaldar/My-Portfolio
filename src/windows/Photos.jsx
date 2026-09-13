@@ -2,31 +2,12 @@ import { WindowControls } from '#components';
 import { gallery, photosLinks } from '#constants';
 import WindowWrapper from '#hoc/WindowWrapper';
 import useWindowStore from '#store/window'
-import { FileType, Mail, Search } from 'lucide-react';
-import React, { useEffect, useState } from 'react';
+import { Mail, Search } from 'lucide-react';
+import React from 'react';
 
 const Photos = () => {
     const { openWindow } = useWindowStore();
-    const [isDark, setIsDark] = useState(false);
 
-    useEffect(() => {
-        const checkTheme = () => {
-            setIsDark(document.documentElement.classList.contains('dark-theme'));
-        };
-
-        // Check initial theme
-        checkTheme();
-
-        // Watch for theme changes
-        const observer = new MutationObserver(checkTheme);
-        observer.observe(document.documentElement, {
-            attributes: true,
-            attributeFilter: ['class']
-        });
-
-        return () => observer.disconnect();
-    }, []);
-    
     return (
         <>
             <div id="window-header">
@@ -45,11 +26,7 @@ const Photos = () => {
                     <ul>
                         {photosLinks.map(({ id, icon, title}) => (
                             <li key={id}>
-                                <img 
-                                    src={icon} 
-                                    alt={title}
-                                    style={{ color: isDark ? '#ffffff' : '#1f2937' }}
-                                />
+                                <img src={icon} alt={title} />
                                 <p>{title}</p>
                             </li>
                         ))}
@@ -70,11 +47,7 @@ const Photos = () => {
                             })
                         }
                         >
-                            <img 
-                                src={img} 
-                                alt={`Gallery image ${id}`}
-                                style={{ color: isDark ? '#ffffff' : '#1f2937' }}
-                            />
+                            <img src={img} alt={`Gallery image ${id}`} />
                         </li>
                         ))}
                     </ul>

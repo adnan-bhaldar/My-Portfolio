@@ -566,11 +566,14 @@ body {
 
     .gallery {
       @apply p-5;
+      color: var(--text-primary);
 
       ul {
         @apply grid grid-cols-5 grid-rows-5 gap-2.5;
 
         li {
+          @apply cursor-pointer;
+
           img {
             @apply size-full object-cover rounded-lg;
           }
@@ -705,6 +708,7 @@ body {
     .preview {
       @apply p-2 max-h-[70vh];
       background-color: var(--preview-bg);
+      color: var(--text-primary);
 
       img {
         @apply w-full h-fit object-contain object-center;
