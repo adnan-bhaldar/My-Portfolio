@@ -13,6 +13,11 @@ import { useEffect } from 'react';
  */
 export const useAutoFullscreen = () => {
     useEffect(() => {
+        // Don't auto-fullscreen during local development — it's disruptive
+        // while iterating (devtools, hot reload, etc.). Vite sets DEV to
+        // true for `npm run dev` and false for production builds.
+        if (import.meta.env.DEV) return;
+
         const events = ['click', 'touchend', 'keydown'];
 
         const removeListeners = () => {
