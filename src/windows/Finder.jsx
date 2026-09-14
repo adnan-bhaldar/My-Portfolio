@@ -10,10 +10,12 @@ import React, { useState } from 'react'
 const Finder = () => {
     const { openWindow } = useWindowStore()
     const { activeLocation, setActiveLocation } = useLocationStore();
-    const [selectedId, setSelectedId] = useState(null)
+    const [selectedItem, setSelectedItem] = useState(null)
 
     const openItem = (item) => {
-        if (item.kind !== 'folder') setSelectedId(item.id)
+        if (item.kind !== 'folder') {
+            setSelectedItem({ locationId: activeLocation.id, itemId: item.id })
+        }
 
         if (item.fileType === 'pdf') return openWindow("resume");
         if (item.kind === 'folder') return setActiveLocation(item);
@@ -52,7 +54,11 @@ const Finder = () => {
                     {activeLocation?.children.map((item) => (
                         <li
                             key={item.id}
-                            className={clsx(item.id === selectedId && 'selected')}
+                            className={clsx(
+                                selectedItem?.locationId === activeLocation.id &&
+                                selectedItem.itemId === item.id &&
+                                'selected'
+                            )}
                             onClick={() => openItem(item)}
                         >
                             <img src={item.icon} alt={item.name} />
