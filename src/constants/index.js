@@ -256,16 +256,14 @@ const WORK_LOCATION = {
       name: "Bindery",
       icon: "/images/folder.png",
       kind: "folder",
-      position: "top-10 left-5", // icon position inside Finder
       windowPosition: "top-[5vh] left-12", // optional: Finder window position
       children: [
         {
           id: 1,
-          name: "Bindery Project.txt",
+          name: "Bindery.txt",
           icon: "/images/txt.png",
           kind: "file",
           fileType: "txt",
-          position: "top-5 left-10",
           description: [
             "The Bindery webapp is a sleek and modern utility platform built using Vite, TypeScript, and Tailwind CSS.",
             "Instead of a clunky document converter, it delivers an immersive, lightning-fast experience with fluid drag-and-drop mechanics, instant visual previews, and smooth transitions",
@@ -280,7 +278,6 @@ const WORK_LOCATION = {
           kind: "file",
           fileType: "url",
           href: "https://bindery.vercel.app/",
-          position: "top-10 right-20",
         },
         {
           id: 4,
@@ -288,7 +285,6 @@ const WORK_LOCATION = {
           icon: "/images/image.png",
           kind: "file",
           fileType: "img",
-          position: "top-52 right-80",
           imageUrl: "/images/project-1.png",
         },
         {
@@ -298,7 +294,6 @@ const WORK_LOCATION = {
           kind: "file",
           fileType: "fig",
           href: "https://google.com",
-          position: "top-60 right-20",
         },
       ],
     },
@@ -309,7 +304,6 @@ const WORK_LOCATION = {
       name: "Quicklook",
       icon: "/images/folder.png",
       kind: "folder",
-      position: "top-52 right-80",
       windowPosition: "top-[17vh] left-12",
       children: [
         {
@@ -318,7 +312,6 @@ const WORK_LOCATION = {
           icon: "/images/txt.png",
           kind: "file",
           fileType: "txt",
-          position: "top-5 right-10",
           description: [
             "The official landing page for QuickLook: The fastest way to preview files on Windows.",
             "Instead of a clunky software landing page, it delivers an immersive experience with bold visuals, interactive layout displays, and smooth navigation.",
@@ -333,7 +326,6 @@ const WORK_LOCATION = {
           kind: "file",
           fileType: "url",
           href: "https://quicklookapp.vercel.app/",
-          position: "top-20 left-20",
         },
         {
           id: 4,
@@ -341,7 +333,6 @@ const WORK_LOCATION = {
           icon: "/images/image.png",
           kind: "file",
           fileType: "img",
-          position: "top-52 left-80",
           imageUrl: "/images/project-2.png",
         },
         {
@@ -351,7 +342,6 @@ const WORK_LOCATION = {
           kind: "file",
           fileType: "fig",
           href: "https://google.com",
-          position: "top-60 left-5",
         },
       ],
     },
@@ -362,7 +352,6 @@ const WORK_LOCATION = {
       name: "SnapThumb",
       icon: "/images/folder.png",
       kind: "folder",
-      position: "top-10 left-80",
       windowPosition: "top-[29vh] left-11",
       children: [
         {
@@ -371,7 +360,6 @@ const WORK_LOCATION = {
           icon: "/images/txt.png",
           kind: "file",
           fileType: "txt",
-          position: "top-5 left-10",
           description: [
             "The SnapThumb webapp is a sleek and modern utility platform built using Vite, TypeScript, and Tailwind CSS.",
             "Instead of a clunky, ad-ridden media scraper, it delivers an immersive experience with bold visuals, interactive image cards, and smooth navigation.",
@@ -386,7 +374,6 @@ const WORK_LOCATION = {
           kind: "file",
           fileType: "url",
           href: "https://snapthumb.vercel.app/",
-          position: "top-10 right-20",
         },
         {
           id: 4,
@@ -394,7 +381,6 @@ const WORK_LOCATION = {
           icon: "/images/image.png",
           kind: "file",
           fileType: "img",
-          position: "top-52 right-80",
           imageUrl: "/images/project-3.png",
         },
         {
@@ -404,7 +390,6 @@ const WORK_LOCATION = {
           kind: "file",
           fileType: "fig",
           href: "https://google.com",
-          position: "top-60 right-20",
         },
       ],
     },
@@ -424,7 +409,6 @@ const ABOUT_LOCATION = {
       icon: "/images/image.png",
       kind: "file",
       fileType: "img",
-      position: "top-10 left-5",
       imageUrl: "/images/adnan.jpg",
     },
     {
@@ -433,7 +417,6 @@ const ABOUT_LOCATION = {
       icon: "/images/image.png",
       kind: "file",
       fileType: "img",
-      position: "top-28 right-72",
       imageUrl: "/images/adnan-2.jpg",
     },
     {
@@ -442,7 +425,6 @@ const ABOUT_LOCATION = {
       icon: "/images/image.png",
       kind: "file",
       fileType: "img",
-      position: "top-52 left-80",
       imageUrl: "/images/adnan-3.png",
     },
     {
@@ -451,7 +433,6 @@ const ABOUT_LOCATION = {
       icon: "/images/txt.png",
       kind: "file",
       fileType: "txt",
-      position: "top-60 left-5",
       subtitle: "Meet the Developer Behind the Code",
       image: "/images/adnan.jpg",
       description: [
@@ -496,7 +477,6 @@ const TRASH_LOCATION = {
       icon: "/images/image.png",
       kind: "file",
       fileType: "img",
-      position: "top-10 left-10",
       imageUrl: "/images/trash-1.png",
     },
     {
@@ -505,7 +485,6 @@ const TRASH_LOCATION = {
       icon: "/images/image.png",
       kind: "file",
       fileType: "img",
-      position: "top-40 left-80",
       imageUrl: "/images/trash-2.png",
     },
   ],
