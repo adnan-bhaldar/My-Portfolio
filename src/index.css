@@ -649,19 +649,27 @@ body {
     }
 
     .content {
-      @apply flex-1 p-8 max-w-2xl relative;
+      @apply flex-1 p-8 max-w-2xl grid grid-cols-4 gap-6 content-start cursor-pointer;
       background-color: var(--window-bg);
 
       li {
-        @apply absolute flex items-center flex-col gap-3;
+        @apply flex items-center flex-col gap-3 rounded-lg p-2 transition-colors duration-150;
 
         img {
           @apply object-contain object-center size-16 relative group-hover:scale-105;
         }
 
         p {
-          @apply text-sm text-center font-medium w-40;
+          @apply text-sm text-center font-medium w-full;
           color: var(--text-primary);
+        }
+
+        &:hover {
+          background-color: color-mix(in srgb, var(--text-primary) 6%, transparent);
+        }
+
+        &.selected {
+          background-color: color-mix(in srgb, var(--text-primary) 12%, transparent);
         }
       }
     }

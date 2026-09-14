@@ -5,13 +5,16 @@ import useLocationStore from '#store/location.js';
 import useWindowStore from '#store/window.js';
 import clsx from 'clsx';
 import { Search } from 'lucide-react'
-import React from 'react'
+import React, { useState } from 'react'
 
 const Finder = () => {
     const { openWindow } = useWindowStore()
     const { activeLocation, setActiveLocation } = useLocationStore();
+    const [selectedId, setSelectedId] = useState(null)
 
     const openItem = (item) => {
+        if (item.kind !== 'folder') setSelectedId(item.id)
+
         if (item.fileType === 'pdf') return openWindow("resume");
         if (item.kind === 'folder') return setActiveLocation(item);
         if (['fig', 'url'].includes(item.fileType) && item.href) return window.open(item.href, "_blank");
@@ -47,7 +50,11 @@ const Finder = () => {
 
                 <ul className="content">
                     {activeLocation?.children.map((item) => (
-                        <li key={item.id} className={item.position} onClick={() => openItem(item)} >
+                        <li
+                            key={item.id}
+                            className={clsx(item.id === selectedId && 'selected')}
+                            onClick={() => openItem(item)}
+                        >
                             <img src={item.icon} alt={item.name} />
                             <p>{item.name}</p>
                         </li>
