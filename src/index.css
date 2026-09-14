@@ -57,8 +57,8 @@ img {
   --content-bg: #1E1E1E;
   --border-color: #343434;
   --hover-bg: #474747;
-  --active-bg: #474747;
-  --active-text: #ffffff;
+  --active-bg: #1e3a8a;
+  --active-text: #93c5fd;
   --search-bg: #222222;
   --search-border: transparent;
   --preview-bg: #323232;
@@ -653,7 +653,7 @@ body {
       background-color: var(--window-bg);
 
       li {
-        @apply flex items-center flex-col gap-3 rounded-lg p-2 transition-colors duration-150;
+        @apply flex items-center flex-col gap-3 rounded-lg p-2 border-2 border-transparent transition-colors duration-150;
 
         img {
           @apply object-contain object-center size-16 relative group-hover:scale-105;
@@ -665,11 +665,12 @@ body {
         }
 
         &:hover {
-          background-color: color-mix(in srgb, var(--text-primary) 6%, transparent);
+          background-color: var(--hover-bg);
         }
 
         &.selected {
-          background-color: color-mix(in srgb, var(--text-primary) 12%, transparent);
+          background-color: var(--hover-bg);
+          border-color: var(--active-text);
         }
       }
     }
