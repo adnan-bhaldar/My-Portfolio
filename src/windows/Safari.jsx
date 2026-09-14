@@ -74,6 +74,7 @@ const Safari = () => {
                             type="text"
                             placeholder='Search or enter website name'
                             className='flex-1'
+                            tabIndex={-1}
                             value={query}
                             onChange={(e) => setQuery(e.target.value)}
                             onKeyDown={handleSearch}
@@ -122,6 +123,7 @@ const Safari = () => {
                                             key={id}
                                             type='button'
                                             className="favorite-tile"
+                                            tabIndex={-1}
                                             style={{ animationDelay: `${index * 60}ms` }}
                                             onMouseDown={(e) => e.stopPropagation()}
                                             onClick={() => (windowKey ? openWindow(windowKey) : openExternal(link))}
@@ -151,7 +153,7 @@ const Safari = () => {
 
                                     <div className="project-card-overlay">
                                         <p>{name}</p>
-                                        <button type='button' onClick={() => openExternal(link)}>
+                                        <button type='button' tabIndex={-1} onClick={() => openExternal(link)}>
                                             Visit <ExternalLink size={14} />
                                         </button>
                                     </div>
@@ -166,6 +168,7 @@ const Safari = () => {
                         <button
                             key={id}
                             type='button'
+                            tabIndex={-1}
                             className={`segment ${activeTab === id ? 'active' : ''}`}
                             onMouseDown={(e) => e.stopPropagation()}
                             onClick={() => setActiveTab(id)}
