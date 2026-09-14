@@ -1,13 +1,23 @@
 import { WindowControls } from '#components';
 import WindowWrapper from '#hoc/WindowWrapper';
 import useWindowStore from '#store/window';
-import { PlusIcon, Share, SquarePen } from 'lucide-react';
+import { PlusIcon, Download, SquarePen } from 'lucide-react';
 import React from 'react';
 
 const ImageWindowContent = () => {
     const { windows } = useWindowStore();
     const data = windows.imgfile?.data;
     const { name, imageUrl } = data || {};
+
+    const handleDownload = () => {
+        if (!imageUrl) return
+        const link = document.createElement('a')
+        link.href = imageUrl
+        link.download = name || 'image'
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+    }
 
     return (
         <>
@@ -17,7 +27,7 @@ const ImageWindowContent = () => {
                 <div className="flex items-center gap-3">
                     <SquarePen className='icon' />
                     <PlusIcon className='icon' />
-                    <Share className='icon' />
+                    <Download className='icon' onClick={handleDownload} />
                 </div>
             </div>
 
