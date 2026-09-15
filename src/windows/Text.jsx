@@ -6,10 +6,7 @@ import React from 'react'
 const Text = () => {
     const { windows } = useWindowStore();
     const data = windows.txtfile?.data;
-
-    if (!data) return null;
-
-    const { name, image, subtitle, description } = data;
+    const { name, image, subtitle, description } = data || {};
 
     return (
         <>

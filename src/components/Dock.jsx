@@ -52,8 +52,8 @@ const Dock = () => {
         dock.addEventListener('mouseleave', resetIcons);
 
         return () => {
-            dock.addEventListener('mousemove', handleMouseMove);
-            dock.addEventListener('mouseleave', resetIcons);
+            dock.removeEventListener('mousemove', handleMouseMove);
+            dock.removeEventListener('mouseleave', resetIcons);
         };
     }, []);
 
@@ -74,7 +74,7 @@ const Dock = () => {
             openWindow(app.id);
         }
 
-        console.log(windows);
+        // console.log(windows); 
 
     }
 
@@ -94,7 +94,7 @@ const Dock = () => {
                             onClick={() => toggleApp({ id, canOpen })}
                         >
                             <img src={`/images/${icon}`}
-                                alt="name"
+                                alt={name}
                                 loading='lazy'
                                 className={canOpen ? '' : "opacity-60"} />
                         </button>
