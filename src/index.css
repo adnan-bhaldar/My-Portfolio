@@ -136,6 +136,7 @@ body {
       opacity: 0;
       transform: translateY(10px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
@@ -143,10 +144,14 @@ body {
   }
 
   @keyframes cursor-blink {
-    0%, 50% {
+
+    0%,
+    50% {
       opacity: 1;
     }
-    50.01%, 100% {
+
+    50.01%,
+    100% {
       opacity: 0;
     }
   }
@@ -636,7 +641,7 @@ body {
 
         .not-active {
           color: var(--text-primary);
-          
+
           &:hover {
             background-color: var(--hover-bg);
           }
