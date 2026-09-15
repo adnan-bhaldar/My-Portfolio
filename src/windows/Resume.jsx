@@ -43,6 +43,7 @@ const Resume = () => {
         <Document
           file="files/resume.pdf"
           onLoadSuccess={onDocumentLoadSuccess}
+          suspense={false}
         >
           {numPages && Array.from(new Array(numPages), (el, index) => (
             <Page
