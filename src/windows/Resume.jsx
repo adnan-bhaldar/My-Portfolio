@@ -23,12 +23,12 @@ const Resume = () => {
         <WindowControls target="resume" />
         <h2>Resume.pdf</h2>
 
-        <a href="files/resume.pdf" download className='cursor-pointer' title='Download Resume'>
+        <a href="files/resume.pdf" download className='cursor-pointer'>
           <Download className='icon' />
         </a>
       </div>
       <div
-        className="overflow-y-auto max-h-[87vh]"
+        className="overflow-y-auto max-h-[87vh] resume-scroll"
         style={{
           scrollbarWidth: 'none',
           msOverflowStyle: 'none',
@@ -36,7 +36,7 @@ const Resume = () => {
         }}
       >
         <style>{`
-            div::-webkit-scrollbar {
+            .resume-scroll::-webkit-scrollbar {
               display: none;
             }
           `}</style>
