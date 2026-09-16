@@ -256,7 +256,6 @@ const WORK_LOCATION = {
       name: "Bindery",
       icon: "/images/folder.png",
       kind: "folder",
-      windowPosition: "top-[5vh] left-12", // optional: Finder window position
       children: [
         {
           id: 1,
@@ -304,7 +303,6 @@ const WORK_LOCATION = {
       name: "Quicklook",
       icon: "/images/folder.png",
       kind: "folder",
-      windowPosition: "top-[17vh] left-12",
       children: [
         {
           id: 1,
@@ -352,7 +350,6 @@ const WORK_LOCATION = {
       name: "SnapThumb",
       icon: "/images/folder.png",
       kind: "folder",
-      windowPosition: "top-[29vh] left-11",
       children: [
         {
           id: 1,
