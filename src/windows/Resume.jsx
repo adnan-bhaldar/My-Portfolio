@@ -23,7 +23,7 @@ const Resume = () => {
         <WindowControls target="resume" />
         <h2>Resume.pdf</h2>
 
-        <a href="files/resume.pdf" download className='cursor-pointer'>
+        <a href="files/resume.pdf" download aria-label="Download Resume" className='cursor-pointer'>
           <Download className='icon' />
         </a>
       </div>
