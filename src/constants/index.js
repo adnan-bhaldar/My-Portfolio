@@ -223,11 +223,11 @@ const gallery = [
   },
   {
     id: 3,
-    img: "/images/gal30.png",
+    img: "/images/gal3.png",
   },
   {
     id: 4,
-    img: "/images/gal40.png",
+    img: "/images/gal4.png",
   },
 ];
 
