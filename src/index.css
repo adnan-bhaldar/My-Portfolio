@@ -2,6 +2,19 @@
 
 @import "tailwindcss";
 
+/* Custom cursor, sourced from /public/cursors/normal.svg.
+   Applied to both the default state and hover/pointer states
+   (anywhere cursor-pointer is used); other cursor states
+   (grab, text, etc.) are untouched and use the browser's native cursor. */
+body {
+  cursor: url('/cursors/normal.svg') 3 1, auto;
+}
+
+.cursor-pointer,
+button {
+  cursor: url('/cursors/normal.svg') 3 1, pointer;
+}
+
 /* Prevent the browser's native drag-ghost behavior on images site-wide,
    since this is a desktop-style UI, not a page with draggable content. */
 img {
@@ -157,7 +170,7 @@ body {
   }
 
   .icon {
-    @apply p-1 rounded hover:cursor-default;
+    @apply p-1 rounded;
 
     &:hover {
       background-color: var(--icon-hover);
