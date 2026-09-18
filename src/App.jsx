@@ -12,7 +12,7 @@ const App = () => {
   useTheme();
   useAutoFullscreen();
   return (
-    <main>
+    <main onContextMenu={(e) => e.preventDefault()}>
       <Navbar />
       <Welcome />
       <Dock />
