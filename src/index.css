@@ -10,9 +10,21 @@ body {
   cursor: url('/cursors/normal.svg') 3 1, auto;
 }
 
+/* Native <button> elements get a pointer cursor from the browser by
+   default even with no cursor-pointer class; this covers both cases
+   in one rule (lower specificity than any class-based cursor rule,
+   so it never overrides a more specific one that already exists). */
 .cursor-pointer,
 button {
   cursor: url('/cursors/normal.svg') 3 1, pointer;
+}
+
+/* GSAP's Draggable sets a grab cursor on window headers (the drag
+   trigger) by default — desired on the header background itself,
+   but it shouldn't leak onto icons/buttons sitting inside it. */
+#window-header button,
+#window-header .icon {
+  cursor: url('/cursors/normal.svg') 3 1, pointer !important;
 }
 
 /* Prevent the browser's native drag-ghost behavior on images site-wide,
@@ -225,15 +237,21 @@ body {
     @apply flex gap-2;
 
     .close {
-      @apply size-3.5 rounded-full cursor-pointer flex items-center justify-center bg-[#ff6157];
+      @apply size-3.5 rounded-full flex items-center justify-center bg-[#ff6157];
     }
 
     .minimize {
-      @apply size-3.5 rounded-full cursor-pointer flex items-center justify-center bg-[#ffc030];
+      @apply size-3.5 rounded-full flex items-center justify-center bg-[#ffc030];
     }
 
     .maximize {
-      @apply size-3.5 rounded-full cursor-pointer flex items-center justify-center bg-[#2acb42];
+      @apply size-3.5 rounded-full flex items-center justify-center bg-[#2acb42];
+    }
+
+    .close,
+    .minimize,
+    .maximize {
+      cursor: url('/cursors/normal.svg') 3 1, pointer !important;
     }
 
     svg,
