@@ -50,7 +50,7 @@ const Finder = () => {
                     {renderList('Work', locations.work.children)}
                 </div>
 
-                <ul className="content">
+                <ul className="content cursor-pointer">
                     {activeLocation?.children.map((item) => (
                         <li
                             key={item.id}

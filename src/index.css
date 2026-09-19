@@ -685,7 +685,7 @@ body {
     }
 
     .content {
-      @apply flex-1 p-8 max-w-2xl grid grid-cols-4 gap-6 content-start cursor-pointer;
+      @apply flex-1 p-8 max-w-2xl grid grid-cols-4 gap-6 content-start;
       background-color: var(--window-bg);
 
       li {
