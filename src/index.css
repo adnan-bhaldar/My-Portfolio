@@ -273,7 +273,8 @@ body {
   }
 
   #safari {
-    @apply w-4xl absolute top-40 left-2/12 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    @apply absolute top-40 left-2/12 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    width: clamp(320px, 52vw, 896px);
     background-color: var(--window-bg);
 
     .search {
@@ -458,7 +459,8 @@ body {
   }
 
   #terminal {
-    @apply w-xl absolute top-32 left-1/12 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    @apply absolute top-32 left-1/12 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    width: clamp(280px, 33vw, 576px);
     background-color: var(--window-bg);
 
     #window-header {
@@ -525,7 +527,8 @@ body {
   }
 
   #contact {
-    @apply max-w-2xl absolute top-60 left-5/12 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    @apply absolute top-60 left-5/12 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    width: clamp(300px, 39vw, 672px);
     background-color: var(--window-bg);
 
     #window-header {
@@ -566,7 +569,8 @@ body {
   }
 
   #photos {
-    @apply max-w-3xl absolute top-96 left-1/2 -translate-y-1/2 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    @apply absolute top-96 left-1/2 -translate-y-1/2 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    width: clamp(320px, 44vw, 768px);
     background-color: var(--window-bg);
 
     .sidebar {
@@ -638,6 +642,7 @@ body {
 
   #resume {
     @apply w-fit h-fit absolute top-16 left-7/12 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    max-width: min(42rem, 85vw);
     background-color: var(--window-bg);
     top: 3.5rem;
     left: 55%;
@@ -650,7 +655,8 @@ body {
   }
 
   #finder {
-    @apply absolute w-3xl left-40 top-20 shadow-2xl drop-shadow-2xl overflow-hidden rounded-xl;
+    @apply absolute left-40 top-20 shadow-2xl drop-shadow-2xl overflow-hidden rounded-xl;
+    width: clamp(320px, 44vw, 768px);
 
     .sidebar {
       @apply w-48 border-r flex flex-col p-5 space-y-3;
@@ -713,7 +719,8 @@ body {
   }
 
   #txtfile {
-    @apply w-md absolute top-36 right-32 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    @apply absolute top-36 right-32 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    width: clamp(280px, 26vw, 448px);
     background-color: var(--window-bg);
 
     #window-header {
@@ -742,7 +749,8 @@ body {
   }
 
   #imgfile {
-    @apply w-xl absolute top-40 left-2/12 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    @apply absolute top-40 left-2/12 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    width: clamp(280px, 33vw, 576px);
     background-color: var(--window-bg);
 
     #window-header {
